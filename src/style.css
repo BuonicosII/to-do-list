@@ -1,0 +1,18 @@
+body {
+    display: grid;
+    grid-template-rows: 6vh auto;
+    grid-template-columns: 12vw auto;
+    height: 100vh;
+    margin: 0;
+}
+
+#header {
+    background-color: blue;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+#leftShoulder {
+    background-color: brown;
+    grid-row-start: 2;
+}
