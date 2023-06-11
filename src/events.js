@@ -1,7 +1,7 @@
 import { ToDo } from "./todo";
 import { allToDos, allProjects, getCurrentProject } from "./checker";
 
-//function to create a todo from a form submit and push it to the alltodos array and a specific array
+//function to create a todo from a form submit and push it to the alltodos array and a specific project array
 function createToDo(event) {
     event.preventDefault();
     let title = document.getElementById("title").value;
@@ -37,3 +37,18 @@ function createToDo(event) {
           }).push(newTask);
     };
 }
+
+//function to create a project from a form submit and push it to the allProjects array
+function createProject(event){
+    event.preventDefault();
+    let title = document.getElementById("projectTitle").value;
+
+    const newProject = new Array ();
+    Object.defineProperty(newProject, 'id', {
+        value: title
+    }); 
+
+    allProjects.push(newProject);
+}
+
+export {createToDo, createProject}
