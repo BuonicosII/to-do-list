@@ -16,3 +16,10 @@ body {
     background-color: brown;
     grid-row-start: 2;
 }
+
+#mainBody {
+    background-color: greenyellow;
+    grid-row-start: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
