@@ -1,5 +1,5 @@
 import { ToDo } from "./todo";
-import { allToDos, allProjects, getCurrentProject } from "./checker";
+import { allToDos, allProjects, currentProject } from "./checker";
 
 //function to create a todo from a form submit and push it to the alltodos array and a specific project array
 function createToDo(event) {
@@ -19,10 +19,10 @@ function createToDo(event) {
 //in the second case the computer recognizes the user is in a project page and retrieves the project name from the
 //getCurrentProject variable which is updated whenever a project is selected or created 
 
-    if (getCurrentProject === undefined){
+    if (currentProject === undefined){
         project = document.getElementByID("projectSelection").value
     } else {
-        project = getCurrentProject;
+        project = currentProject;
     }
         
     const newTask = new ToDo (title, description, dueDate, priority, project);
@@ -36,6 +36,8 @@ function createToDo(event) {
             return object.id === `${project}`
           }).push(newTask);
     };
+
+    console.log(allToDos);
 }
 
 //function to create a project from a form submit and push it to the allProjects array

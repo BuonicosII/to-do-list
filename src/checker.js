@@ -5,15 +5,15 @@ const allToDos = []
 const allProjects = []
 
 //a variable to track which project is currently selected
-let currentProject
+let currentProject = undefined;
 
-let getCurrentProject = function(){
-    return currentProject
-};
+//let getCurrentProject = () => {
+//    return currentProject
+//};
 
-let setCurrentProject = function(value){
-    currentProject = value;
-    return currentProject;
-}
+//let setCurrentProject = function(value){
+//    currentProject = value;
+//    return currentProject;
+//}
 
-export { allToDos, allProjects, getCurrentProject, setCurrentProject}
+export { allToDos, allProjects, currentProject }
