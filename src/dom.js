@@ -1,5 +1,5 @@
 import { allProjects, currentProject } from "./checker";
-import { createToDo } from "./events";
+import { createToDo, createProject } from "./events";
 
 //function to create a form that allows users to create a new ToDo
 
@@ -7,6 +7,7 @@ function createForm () {
     let mainBody = document.getElementById("mainBody");
     let form = document.createElement("form");
     form.setAttribute("action", "");
+    form.setAttribute("id", "toDoForm");
 
     //title input field
     let title = document.createElement("input");
@@ -42,6 +43,7 @@ function createForm () {
     priority.setAttribute("id", "priority");
     priority.required = true;
     let priorityLabel = document.createElement("label");
+    priorityLabel.setAttribute("for", "priority");
     priorityLabel.textContent = "Priority";
     let priorityOne = document.createElement("option");
     priorityOne.setAttribute("value", "1");
@@ -60,6 +62,7 @@ function createForm () {
     let submitButton = document.createElement("button");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("id", "submitButton");
+    submitButton.setAttribute("form", "toDoForm");
     submitButton.textContent = "Add";
     submitButton.addEventListener("click", createToDo);
 
@@ -80,6 +83,7 @@ function createForm () {
         let projectSelection = document.createElement("select");
         projectSelection.setAttribute("id", "projectSelection");
         let projectSelectionLabel = document.createElement("label");
+        projectSelectionLabel.setAttribute("for", "projectSelection");
         projectSelectionLabel.textContent =  "Project";
     
         for (const item of allProjects) {
@@ -94,6 +98,33 @@ function createForm () {
     }
     form.appendChild(submitButton);
     console.log(currentProject)
+}
+
+//function to create a form that allows users to create a new project
+
+function createProjectForm () {
+    let mainBody = document.getElementById("mainBody");
+    let form = document.createElement("form");
+    form.setAttribute("action", "");
+    form.setAttribute("id", "projectForm");
+
+    //project name input field
+    let projectName = document.createElement("input");
+    projectName.setAttribute("id", "projectTitle");
+    let projectNameLabel = document.crateElement("label");
+    projectNameLabel.setAttribute("for", "projectTitle");
+    
+    //submitbutton
+    let submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("id", "submitButton");
+    submitButton.setAttribute("form", "projectForm");
+    submitButton.textContent = "Add";
+    submitButton.addEventListener("click", createProject);
+    
+    form.appendChild(projectNameLabel);
+    form.appendChild(projectName);
+    form.appendChild(submitButton);
 }
 
 export { createForm }
