@@ -19,7 +19,7 @@ function createToDo(event) {
 //in the second case the computer recognizes the user is in a project page and retrieves the project name from the
 //getCurrentProject variable which is updated whenever a project is selected or created 
 
-    if (document.getElementByID("project") === true){
+    if (getCurrentProject === undefined){
         project = document.getElementByID("projectSelection").value
     } else {
         project = getCurrentProject;

@@ -1,3 +1,6 @@
+import { allProjects, getCurrentProject } from "./checker";
+import { createToDo } from "./events";
+
 //function to create a form that allows users to create a new ToDo
 
 function createForm () {
@@ -39,12 +42,36 @@ function createForm () {
     priority.setAttribute("id", "priority");
     let priorityOne = document.createElement("option");
     priorityOne.setAttribute("value", "1");
+    priorityOne.textContent = "High";
     let priorityTwo = document.createElement("option");
     priorityTwo.setAttribute("value", "2");
+    priorityTwo.textContent = "Medium";
     let priorityThree = document.createElement("option");
     priorityThree.setAttribute("value", "3");
+    priorityThree.textContent = "Low";
     priority.appendChild(priorityOne);
     priority.appendChild(priorityTwo);
     priority.appendChild(priorityThree);
+
+    //project input field
+    //checks whether the user is on a project page
+    if (getCurrentProject === undefined) {
+    let projectSelection = document.createElement("select");
+    projectSelection.setAttribute("id", "projectSelection");
+
+    for (const item of allProjects) {
+        let option = document.createElement("option");
+        option.setAttribute("value", `${item.id}`);
+        option.textContent = `${item.id}`;
+        projectSelection.appendChild(option);
+        }
+    };
+
+    //submitbutton
+    let submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("id", "submitButton");
+    submitButton.textContent = "Add";
+    submitButton.addEventListener("click", createToDo)
 
 }
