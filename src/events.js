@@ -51,6 +51,7 @@ function createProject(event){
     }); 
 
     allProjects.push(newProject);
+    console.log(allProjects)
 }
 
 export {createToDo, createProject}

@@ -1,4 +1,4 @@
-import { allProjects, currentProject } from "./checker";
+import { allToDos, allProjects, currentProject } from "./checker";
 import { createToDo, createProject } from "./events";
 
 //function to create a form that allows users to create a new ToDo
@@ -111,7 +111,7 @@ function createProjectForm () {
     //project name input field
     let projectName = document.createElement("input");
     projectName.setAttribute("id", "projectTitle");
-    let projectNameLabel = document.crateElement("label");
+    let projectNameLabel = document.createElement("label");
     projectNameLabel.setAttribute("for", "projectTitle");
     
     //submitbutton
@@ -125,6 +125,41 @@ function createProjectForm () {
     form.appendChild(projectNameLabel);
     form.appendChild(projectName);
     form.appendChild(submitButton);
+    mainBody.appendChild(form);
 }
 
-export { createForm }
+//function to display all tasks and a button to add a new one
+
+function allTasks () {
+    let mainBody = document.getElementById("mainBody");
+
+    for (const todo of allToDos) {
+        let toDoCard = document.createElement("div");
+        let title = document.createElement("p");
+        title.textContent = todo.title;
+        toDoCard.appendChild(title);
+        let description = document.createElement("p");
+        description.textContent = todo.description;
+        toDoCard.appendChild(description);
+        let dueDate = document.createElement("p");
+        dueDate.textContent = todo.dueDate;
+        toDoCard.appendChild(dueDate);
+        let priority = document.createElement("p");
+        if (todo.priority === 1) {
+            priority.textContent = "High";
+            toDoCard.appendChild(priority);
+        } else if (todo.priority === 2) {
+            priority.textContent = "Medium";
+            toDoCard.appendChild(priority);
+        } else {
+            priority.textContent = "Low";
+            toDoCard.appendChild(priority);
+        }
+        let project = document.createElement("p");
+        project.textContent = todo.project;
+        toDoCard.appendChild(project);
+        mainBody.appendChild(toDoCard);
+    }
+}
+
+export { createForm, createProjectForm, allTasks }

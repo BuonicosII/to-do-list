@@ -1,4 +1,6 @@
 import './style.css';
-import { createForm } from './dom';
+import { createForm, createProjectForm, allTasks } from './dom';
 
-createForm();
+let allTasksButton = document.getElementById("loadtask")
+
+allTasksButton.addEventListener("click", allTasks);
