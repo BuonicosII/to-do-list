@@ -5,6 +5,11 @@ import { createToDo, createProject } from "./events";
 
 function createForm () {
     let mainBody = document.getElementById("mainBody");
+
+    while (mainBody.hasChildNodes()) {
+        mainBody.removeChild(mainBody.firstChild);
+    };
+
     let form = document.createElement("form");
     form.setAttribute("action", "");
     form.setAttribute("id", "toDoForm");
@@ -65,6 +70,13 @@ function createForm () {
     submitButton.setAttribute("form", "toDoForm");
     submitButton.textContent = "Add";
     submitButton.addEventListener("click", createToDo);
+    submitButton.addEventListener("click", () => {
+        if (currentProject !== undefined) {
+            console.log("hello")
+        } else {
+            allTasks();
+        }
+    });
 
     mainBody.appendChild(form);
     form.appendChild(titleLabel);
@@ -85,6 +97,10 @@ function createForm () {
         let projectSelectionLabel = document.createElement("label");
         projectSelectionLabel.setAttribute("for", "projectSelection");
         projectSelectionLabel.textContent =  "Project";
+
+        let noneOption = document.createElement("option");
+        noneOption.textContent = " - ";
+        projectSelection.appendChild(noneOption);
     
         for (const item of allProjects) {
             let option = document.createElement("option");
@@ -132,6 +148,16 @@ function createProjectForm () {
 
 function allTasks () {
     let mainBody = document.getElementById("mainBody");
+    currentProject = undefined;
+
+    while (mainBody.hasChildNodes()) {
+        mainBody.removeChild(mainBody.firstChild);
+    };
+    
+    let addTaskBtn = document.createElement("button");
+    addTaskBtn.textContent = "New toDo";
+    addTaskBtn.addEventListener("click", createForm);
+    mainBody.appendChild(addTaskBtn);
 
     for (const todo of allToDos) {
         let toDoCard = document.createElement("div");
@@ -160,6 +186,12 @@ function allTasks () {
         toDoCard.appendChild(project);
         mainBody.appendChild(toDoCard);
     }
+}
+
+//function to display all projects
+
+function displayAllProjects() {
+
 }
 
 export { createForm, createProjectForm, allTasks }

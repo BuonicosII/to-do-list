@@ -20,7 +20,7 @@ function createToDo(event) {
 //getCurrentProject variable which is updated whenever a project is selected or created 
 
     if (currentProject === undefined){
-        project = document.getElementByID("projectSelection").value
+        project = document.getElementById("projectSelection").value
     } else {
         project = currentProject;
     }

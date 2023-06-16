@@ -21,6 +21,8 @@ Object.defineProperty(resolution, 'id', {value: "Resolution"});
 allToDos.push(ghost, under);
 resolution.push(ghost, under);
 
+allProjects.push(resolution);
+
 //let getCurrentProject = () => {
 //    return currentProject
 //};
