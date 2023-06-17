@@ -119,7 +119,12 @@ function createForm () {
 //function to create a form that allows users to create a new project
 
 function createProjectForm () {
-    let mainBody = document.getElementById("mainBody");
+    let projectList = document.getElementById("projectList");
+
+    while (projectList.hasChildNodes()) {
+        projectList.removeChild(projectList.firstChild);
+    };
+
     let form = document.createElement("form");
     form.setAttribute("action", "");
     form.setAttribute("id", "projectForm");
@@ -137,11 +142,12 @@ function createProjectForm () {
     submitButton.setAttribute("form", "projectForm");
     submitButton.textContent = "Add";
     submitButton.addEventListener("click", createProject);
+    submitButton.addEventListener("click", displayAllProjects);
     
     form.appendChild(projectNameLabel);
     form.appendChild(projectName);
     form.appendChild(submitButton);
-    mainBody.appendChild(form);
+    projectList.appendChild(form);
 }
 
 //function to display all tasks and a button to add a new one
@@ -191,7 +197,23 @@ function allTasks () {
 //function to display all projects
 
 function displayAllProjects() {
+    let projectList = document.getElementById("projectList");
+
+    while (projectList.hasChildNodes()) {
+        projectList.removeChild(projectList.firstChild);
+    };
+
+    let addProjectBtn = document.createElement("button");
+    addProjectBtn.textContent = "Add Project";
+    addProjectBtn.addEventListener("click", createProjectForm);
+    projectList.appendChild(addProjectBtn);
+
+    for (const project of allProjects) {
+        let projectListing = document.createElement("p");
+        projectListing.textContent = project.id;
+        projectList.appendChild(projectListing);
+    }
 
 }
 
-export { createForm, createProjectForm, allTasks }
+export { createForm, createProjectForm, allTasks, displayAllProjects }
