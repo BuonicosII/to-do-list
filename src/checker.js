@@ -15,13 +15,19 @@ const ghost = new ToDo ("Ghost Walking", "A Lamb of God song", 2011-12-6, 1, "Re
 
 const under = new ToDo ("The Undertow", "Another Lamb of God song", 2012-1-24, 2, "Resolution");
 
+const deuts = new ToDo ("Deutschland", "A Rammstein song", 2019-1-3, 3, "Rammstein");
+
 const resolution = new Array 
 Object.defineProperty(resolution, 'id', {value: "Resolution"});
 
-allToDos.push(ghost, under);
-resolution.push(ghost, under);
+const rammstein = new Array
+Object.defineProperty(rammstein, 'id', {value: "Rammstein"});
 
-allProjects.push(resolution);
+allToDos.push(ghost, under, deuts);
+resolution.push(ghost, under);
+rammstein.push(deuts);
+
+allProjects.push(resolution, rammstein);
 
 //let getCurrentProject = () => {
 //    return currentProject

@@ -44,6 +44,7 @@ function createToDo(event) {
 function createProject(event){
     event.preventDefault();
     let title = document.getElementById("projectTitle").value;
+    title = title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
 
     const newProject = new Array ();
     Object.defineProperty(newProject, 'id', {
