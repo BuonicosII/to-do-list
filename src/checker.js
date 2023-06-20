@@ -11,11 +11,11 @@ let currentProject = undefined;
 
 //two examples of toDos to troubleshoot
 
-const ghost = new ToDo ("Ghost Walking", "A Lamb of God song", 2011-12-6, 1, "Resolution");
+const ghost = new ToDo ("Ghost Walking", "A Lamb of God song", "2011-12-06", 1, "Resolution");
 
-const under = new ToDo ("The Undertow", "Another Lamb of God song", 2012-1-24, 2, "Resolution");
+const under = new ToDo ("The Undertow", "Another Lamb of God song", "2012-01-24", 2, "Resolution");
 
-const deuts = new ToDo ("Deutschland", "A Rammstein song", 2019-1-3, 3, "Rammstein");
+const deuts = new ToDo ("Deutschland", "A Rammstein song", "2019-01-03", 3, "Rammstein");
 
 const resolution = new Array 
 Object.defineProperty(resolution, 'id', {value: "Resolution"});
