@@ -1,5 +1,6 @@
 import { allToDos, allProjects, currentProject } from "./checker";
 import { createToDo, createProject } from "./events";
+import { format } from "date-fns";
 
 //function to create a form that allows users to create a new ToDo
 
@@ -173,7 +174,7 @@ function allTasks () {
         description.textContent = todo.description;
         toDoCard.appendChild(description);
         let dueDate = document.createElement("p");
-        dueDate.textContent = todo.dueDate;
+        dueDate.textContent = `${format(todo.dueDate, "EEEE d MMMM yyyy")}`;
         toDoCard.appendChild(dueDate);
         let priority = document.createElement("p");
         if (todo.priority === 1) {
@@ -246,7 +247,7 @@ function displayTodosInProject() {
         description.textContent = todo.description;
         toDoCard.appendChild(description);
         let dueDate = document.createElement("p");
-        dueDate.textContent = todo.dueDate;
+        dueDate.textContent = `${format(todo.dueDate, "EEEE d MMMM yyyy")}`;
         toDoCard.appendChild(dueDate);
         let priority = document.createElement("p");
         if (todo.priority === 1) {
