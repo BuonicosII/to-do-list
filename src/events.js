@@ -32,12 +32,11 @@ function createToDo(event) {
 
 //(1) this condition allows the toDo object to be pushed only in an existing project array
     if (allProjects.findIndex(object => { return object.id === `${project}`}) !== -1) {
-        allProjects.findIndex(object => {
+        allProjects.find(object => {
             return object.id === `${project}`
           }).push(newTask);
     };
 
-    console.log(allToDos);
 }
 
 //function to create a project from a form submit and push it to the allProjects array

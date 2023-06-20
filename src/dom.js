@@ -72,7 +72,7 @@ function createForm () {
     submitButton.addEventListener("click", createToDo);
     submitButton.addEventListener("click", () => {
         if (currentProject !== undefined) {
-            console.log("hello")
+            displayTodosInProject();
         } else {
             allTasks();
         }
@@ -211,16 +211,20 @@ function displayAllProjects() {
         let projectListing = document.createElement("p");
         projectListing.textContent = project.id;
         projectList.appendChild(projectListing);
-        projectListing.addEventListener("click", displayTodosInProject)
+        projectListing.addEventListener("click", displayTodosInProjectShoulder)
     }
 
 }
 
+function displayTodosInProjectShoulder(event) {
+    currentProject = event.target.textContent;
+    displayTodosInProject();
+}
+
 //function to display all toDos present in a project
 
-function displayTodosInProject(event) {
+function displayTodosInProject() {
     let mainBody = document.getElementById("mainBody");
-    currentProject = event.target.textContent;
 
     while (mainBody.hasChildNodes()) {
         mainBody.removeChild(mainBody.firstChild);
@@ -231,7 +235,7 @@ function displayTodosInProject(event) {
     addTaskBtn.addEventListener("click", createForm);
     mainBody.appendChild(addTaskBtn);
 
-    let thisProject = allProjects.find(({ id }) => id === event.target.textContent);
+    let thisProject = allProjects.find(({ id }) => id === currentProject);
 
     for (const todo of thisProject) {
         let toDoCard = document.createElement("div");
