@@ -153,6 +153,7 @@ function createProjectForm () {
 //function to populate the mainbody with cards for each toDo
 
 function createCard(todo) {
+        let mainBody = document.getElementById("mainBody");
         let toDoCard = document.createElement("div");
         let title = document.createElement("p");
         title.textContent = todo.title;
@@ -183,7 +184,6 @@ function createCard(todo) {
 //function to display all tasks and a button to add a new one
 
 function allTasks () {
-    let mainBody = document.getElementById("mainBody");
     currentProject = undefined;
 
     while (mainBody.hasChildNodes()) {
@@ -231,7 +231,6 @@ function displayTodosInProjectShoulder(event) {
 //function to display all toDos present in a project
 
 function displayTodosInProject() {
-    let mainBody = document.getElementById("mainBody");
 
     while (mainBody.hasChildNodes()) {
         mainBody.removeChild(mainBody.firstChild);
@@ -252,7 +251,6 @@ function displayTodosInProject() {
 //function to display all toDos whose due date is today
 
 function dueDateIsToday() {
-    let mainBody = document.getElementById("mainBody");
     currentProject = undefined;
 
     while (mainBody.hasChildNodes()) {
@@ -266,4 +264,21 @@ function dueDateIsToday() {
     }
 }
 
-export { createForm, createProjectForm, allTasks, displayAllProjects, dueDateIsToday }
+//function to display all toDos whose due date is in the current week
+
+function dueDateIsThisWeek() {
+    currentProject = undefined;
+
+    while (mainBody.hasChildNodes()) {
+        mainBody.removeChild(mainBody.firstChild);
+    };
+
+    for (const todo of allToDos) {
+        if (format(todo.dueDate, "w yyyy") === format(new Date(), "w yyyy")) {
+            createCard(todo);
+        }
+    }
+}
+
+
+export { createForm, createProjectForm, allTasks, displayAllProjects, dueDateIsToday, dueDateIsThisWeek }
