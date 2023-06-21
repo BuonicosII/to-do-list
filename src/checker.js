@@ -11,7 +11,7 @@ let currentProject = undefined;
 
 //two examples of toDos to troubleshoot
 
-const ghost = new ToDo ("Ghost Walking", "A Lamb of God song", "2011-12-06", 1, "Resolution");
+const ghost = new ToDo ("Ghost Walking", "A Lamb of God song", new Date(), 1, "Resolution");
 
 const under = new ToDo ("The Undertow", "Another Lamb of God song", "2012-01-24", 2, "Resolution");
 

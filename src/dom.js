@@ -265,8 +265,46 @@ function displayTodosInProject() {
         toDoCard.appendChild(project);
         mainBody.appendChild(toDoCard);
     }
+}
+//function to display all toDos whose due date is today
 
+function dueDateIsToday() {
+    let mainBody = document.getElementById("mainBody");
+    currentProject = undefined;
 
+    while (mainBody.hasChildNodes()) {
+        mainBody.removeChild(mainBody.firstChild);
+    };
+
+    for (const todo of allToDos) {
+        if (format(todo.dueDate, "d MMMM yyyy") === format(new Date(), "d MMMM yyyy")) {
+            let toDoCard = document.createElement("div");
+            let title = document.createElement("p");
+            title.textContent = todo.title;
+            toDoCard.appendChild(title);
+            let description = document.createElement("p");
+            description.textContent = todo.description;
+            toDoCard.appendChild(description);
+            let dueDate = document.createElement("p");
+            dueDate.textContent = `${format(todo.dueDate, "EEEE d MMMM yyyy")}`;
+            toDoCard.appendChild(dueDate);
+            let priority = document.createElement("p");
+            if (todo.priority === 1) {
+                priority.textContent = "High";
+                toDoCard.appendChild(priority);
+            } else if (todo.priority === 2) {
+                priority.textContent = "Medium";
+                toDoCard.appendChild(priority);
+            } else {
+                priority.textContent = "Low";
+                toDoCard.appendChild(priority);
+            }
+            let project = document.createElement("p");
+            project.textContent = todo.project;
+            toDoCard.appendChild(project);
+            mainBody.appendChild(toDoCard);
+        }
+    }
 }
 
-export { createForm, createProjectForm, allTasks, displayAllProjects }
+export { createForm, createProjectForm, allTasks, displayAllProjects, dueDateIsToday }
