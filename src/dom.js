@@ -150,22 +150,9 @@ function createProjectForm () {
     projectList.appendChild(form);
 }
 
-//function to display all tasks and a button to add a new one
+//function to populate the mainbody with cards for each toDo
 
-function allTasks () {
-    let mainBody = document.getElementById("mainBody");
-    currentProject = undefined;
-
-    while (mainBody.hasChildNodes()) {
-        mainBody.removeChild(mainBody.firstChild);
-    };
-    
-    let addTaskBtn = document.createElement("button");
-    addTaskBtn.textContent = "New toDo";
-    addTaskBtn.addEventListener("click", createForm);
-    mainBody.appendChild(addTaskBtn);
-
-    for (const todo of allToDos) {
+function createCard(todo) {
         let toDoCard = document.createElement("div");
         let title = document.createElement("p");
         title.textContent = todo.title;
@@ -191,6 +178,25 @@ function allTasks () {
         project.textContent = todo.project;
         toDoCard.appendChild(project);
         mainBody.appendChild(toDoCard);
+}
+
+//function to display all tasks and a button to add a new one
+
+function allTasks () {
+    let mainBody = document.getElementById("mainBody");
+    currentProject = undefined;
+
+    while (mainBody.hasChildNodes()) {
+        mainBody.removeChild(mainBody.firstChild);
+    };
+    
+    let addTaskBtn = document.createElement("button");
+    addTaskBtn.textContent = "New toDo";
+    addTaskBtn.addEventListener("click", createForm);
+    mainBody.appendChild(addTaskBtn);
+
+    for (const todo of allToDos) {
+        createCard(todo);
     }
 }
 
@@ -239,33 +245,10 @@ function displayTodosInProject() {
     let thisProject = allProjects.find(({ id }) => id === currentProject);
 
     for (const todo of thisProject) {
-        let toDoCard = document.createElement("div");
-        let title = document.createElement("p");
-        title.textContent = todo.title;
-        toDoCard.appendChild(title);
-        let description = document.createElement("p");
-        description.textContent = todo.description;
-        toDoCard.appendChild(description);
-        let dueDate = document.createElement("p");
-        dueDate.textContent = `${format(todo.dueDate, "EEEE d MMMM yyyy")}`;
-        toDoCard.appendChild(dueDate);
-        let priority = document.createElement("p");
-        if (todo.priority === 1) {
-            priority.textContent = "High";
-            toDoCard.appendChild(priority);
-        } else if (todo.priority === 2) {
-            priority.textContent = "Medium";
-            toDoCard.appendChild(priority);
-        } else {
-            priority.textContent = "Low";
-            toDoCard.appendChild(priority);
-        }
-        let project = document.createElement("p");
-        project.textContent = todo.project;
-        toDoCard.appendChild(project);
-        mainBody.appendChild(toDoCard);
+        createCard(todo);
     }
 }
+
 //function to display all toDos whose due date is today
 
 function dueDateIsToday() {
@@ -278,31 +261,7 @@ function dueDateIsToday() {
 
     for (const todo of allToDos) {
         if (format(todo.dueDate, "d MMMM yyyy") === format(new Date(), "d MMMM yyyy")) {
-            let toDoCard = document.createElement("div");
-            let title = document.createElement("p");
-            title.textContent = todo.title;
-            toDoCard.appendChild(title);
-            let description = document.createElement("p");
-            description.textContent = todo.description;
-            toDoCard.appendChild(description);
-            let dueDate = document.createElement("p");
-            dueDate.textContent = `${format(todo.dueDate, "EEEE d MMMM yyyy")}`;
-            toDoCard.appendChild(dueDate);
-            let priority = document.createElement("p");
-            if (todo.priority === 1) {
-                priority.textContent = "High";
-                toDoCard.appendChild(priority);
-            } else if (todo.priority === 2) {
-                priority.textContent = "Medium";
-                toDoCard.appendChild(priority);
-            } else {
-                priority.textContent = "Low";
-                toDoCard.appendChild(priority);
-            }
-            let project = document.createElement("p");
-            project.textContent = todo.project;
-            toDoCard.appendChild(project);
-            mainBody.appendChild(toDoCard);
+            createCard(todo);
         }
     }
 }
