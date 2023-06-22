@@ -7,9 +7,9 @@ import { format } from "date-fns";
 function createForm () {
     let mainBody = document.getElementById("mainBody");
 
-    while (mainBody.hasChildNodes()) {
+    //hile (mainBody.hasChildNodes()) {
         mainBody.removeChild(mainBody.firstChild);
-    };
+    //};
 
     let form = document.createElement("form");
     form.setAttribute("action", "");
@@ -79,7 +79,7 @@ function createForm () {
         }
     });
 
-    mainBody.appendChild(form);
+    mainBody.prepend(form);
     form.appendChild(titleLabel);
     form.appendChild(title);
     form.appendChild(descriptionLabel);
@@ -195,6 +195,15 @@ function allTasks () {
     addTaskBtn.addEventListener("click", createForm);
     mainBody.appendChild(addTaskBtn);
 
+    allToDos.sort(function(a, b) {
+        let dueDateA = new Date(a.dueDate);
+        let dueDAteB = new Date(b.dueDate);
+
+        if (dueDateA < dueDAteB) return -1;
+        if (dueDateA > dueDAteB) return 1;
+        return 0;
+    });
+    
     for (const todo of allToDos) {
         createCard(todo);
     }
@@ -242,6 +251,15 @@ function displayTodosInProject() {
     mainBody.appendChild(addTaskBtn);
 
     let thisProject = allProjects.find(({ id }) => id === currentProject);
+
+    thisProject.sort(function(a, b) {
+        let dueDateA = new Date(a.dueDate);
+        let dueDAteB = new Date(b.dueDate);
+
+        if (dueDateA < dueDAteB) return -1;
+        if (dueDateA > dueDAteB) return 1;
+        return 0;
+    });
 
     for (const todo of thisProject) {
         createCard(todo);
