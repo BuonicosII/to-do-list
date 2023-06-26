@@ -155,6 +155,7 @@ function createProjectForm () {
 function createCard(todo) {
         let mainBody = document.getElementById("mainBody");
         let toDoCard = document.createElement("div");
+        toDoCard.setAttribute("class", "card");
         let title = document.createElement("p");
         title.textContent = todo.title;
         toDoCard.appendChild(title);
@@ -190,8 +191,11 @@ function allTasks () {
         mainBody.removeChild(mainBody.firstChild);
     };
     
-    let addTaskBtn = document.createElement("button");
-    addTaskBtn.textContent = "New toDo";
+    let addTaskBtn = document.createElement("div");
+    addTaskBtn.setAttribute("class", "newTaskBtn");
+    let addTaskBtnContent1 = document.createElement("p");
+    addTaskBtnContent1.textContent = "+";
+    addTaskBtn.appendChild(addTaskBtnContent1);
     addTaskBtn.addEventListener("click", createForm);
     mainBody.appendChild(addTaskBtn);
 
@@ -245,10 +249,15 @@ function displayTodosInProject() {
         mainBody.removeChild(mainBody.firstChild);
     };
 
-    let addTaskBtn = document.createElement("button");
-    addTaskBtn.textContent = "New toDo";
+    let addTaskBtn = document.createElement("div");
+    addTaskBtn.setAttribute("class", "newTaskBtn");
+    let addTaskBtnContent1 = document.createElement("p");
+    addTaskBtnContent1.textContent = "+";
+    addTaskBtn.appendChild(addTaskBtnContent1);
     addTaskBtn.addEventListener("click", createForm);
     mainBody.appendChild(addTaskBtn);
+
+
 
     let thisProject = allProjects.find(({ id }) => id === currentProject);
 
