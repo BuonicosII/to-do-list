@@ -88,8 +88,18 @@ html {
     gap: 1.7vh;
 }
 
+#leftShoulder .interactable {
+    text-decoration: underline rgba(0, 0, 0, 0);
+    transition: text-decoration 650ms;
+}
+
 #leftShoulder p {
     font-size: 1.7vh;
+}
+
+#leftShoulder .interactable:hover {
+    text-decoration: underline rgb(0, 0, 0);
+
 }
 
 #projectList {

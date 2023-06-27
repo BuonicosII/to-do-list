@@ -156,9 +156,15 @@ function createProjectForm () {
     submitButton.addEventListener("click", createProject);
     submitButton.addEventListener("click", displayAllProjects);
     
+    //cancelButton
+    let cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.addEventListener("click", displayAllProjects);
+
     form.appendChild(projectNameLabel);
     form.appendChild(projectName);
     form.appendChild(submitButton);
+    form.appendChild(cancelButton);
     projectList.appendChild(form);
 }
 
@@ -242,6 +248,7 @@ function displayAllProjects() {
     for (const project of allProjects) {
         let projectListing = document.createElement("p");
         projectListing.textContent = project.id;
+        projectListing.setAttribute("class", "interactable");
         projectList.appendChild(projectListing);
         projectListing.addEventListener("click", displayTodosInProjectShoulder)
     }
