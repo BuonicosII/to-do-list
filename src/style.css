@@ -140,3 +140,13 @@ html {
     font-weight: 700;
     color: grey;
 }
+
+#mainBody form {
+    border: solid black 1px; 
+    border-radius: 1rem;
+    padding: 1rem;
+    height: 15vh;
+    width: 15vw;
+    box-shadow: 5px 5px 10px grey;
+    background-color: white;
+}

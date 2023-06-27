@@ -79,6 +79,17 @@ function createForm () {
         }
     });
 
+    //cancelbutton
+    let cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.addEventListener("click", () => {
+        if (currentProject !== undefined) {
+            displayTodosInProject();
+        } else {
+            allTasks();
+        }
+    });
+
     mainBody.prepend(form);
     form.appendChild(titleLabel);
     form.appendChild(title);
@@ -114,6 +125,7 @@ function createForm () {
         form.appendChild(projectSelection);
     }
     form.appendChild(submitButton);
+    form.appendChild(cancelButton);
 }
 
 //function to create a form that allows users to create a new project
