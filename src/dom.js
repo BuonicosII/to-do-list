@@ -25,7 +25,7 @@ function createForm () {
     titleLabel.setAttribute("for", "title");
     titleLabel.textContent = "Title";
     let titleDiv = document.createElement("div");
-    titleDiv.setAttribute("id", "titleDiv");
+    titleDiv.setAttribute("class", "titleDiv");
     titleDiv.appendChild(titleLabel);
     titleDiv.appendChild(title);
 
@@ -38,7 +38,7 @@ function createForm () {
     descriptionLabel.setAttribute("for", "description");
     descriptionLabel.textContent = "Description";
     let descriptionDiv = document.createElement("div");
-    descriptionDiv.setAttribute("id", "descriptionDiv");
+    descriptionDiv.setAttribute("class", "descriptionDiv");
     descriptionDiv.appendChild(descriptionLabel);
     descriptionDiv.appendChild(description);
 
@@ -52,7 +52,7 @@ function createForm () {
     dueDateLabel.setAttribute("for", "dueDate");
     dueDateLabel.textContent = "Due Date";
     let dueDateDiv = document.createElement("div");
-    dueDateDiv.setAttribute("id", "dueDateDiv");
+    dueDateDiv.setAttribute("class", "dueDateDiv");
     dueDateDiv.appendChild(dueDateLabel);
     dueDateDiv.appendChild(dueDate);
 
@@ -76,7 +76,7 @@ function createForm () {
     priority.appendChild(priorityTwo);
     priority.appendChild(priorityThree);
     let priorityDiv = document.createElement("div");
-    priorityDiv.setAttribute("id", "priorityDiv");
+    priorityDiv.setAttribute("class", "priorityDiv");
     priorityDiv.appendChild(priorityLabel);
     priorityDiv.appendChild(priority);
 
@@ -107,7 +107,7 @@ function createForm () {
     });
 
     let buttonsDiv = document.createElement("div");
-    buttonsDiv.setAttribute("id", "buttonDiv");
+    buttonsDiv.setAttribute("class", "buttonDiv");
     buttonsDiv.appendChild(submitButton);
     buttonsDiv.appendChild(cancelButton);
 
@@ -141,7 +141,7 @@ function createForm () {
         let projectSelectionDiv = document.createElement("div");
         projectSelectionDiv.appendChild(projectSelectionLabel);
         projectSelectionDiv.appendChild(projectSelection);
-        projectSelectionDiv.setAttribute("id", "projectSelectionDiv");
+        projectSelectionDiv.setAttribute("class", "projectSelectionDiv");
         form.appendChild(projectSelectionDiv);
     }
     form.appendChild(buttonsDiv);
@@ -195,7 +195,10 @@ function createCard(todo) {
         toDoCard.setAttribute("class", "card");
         let title = document.createElement("p");
         title.textContent = todo.title;
-        toDoCard.appendChild(title);
+        let titleDiv = createElement("div");
+        titleDiv.setAttribute("class", "titleDiv");
+        titleDiv.appendChild(title);
+        toDoCard.appendChild(titleDiv);
         let description = document.createElement("p");
         description.textContent = todo.description;
         toDoCard.appendChild(description);

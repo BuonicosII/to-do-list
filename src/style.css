@@ -199,32 +199,32 @@ input {
     flex-wrap: wrap;
 }
 
-#titleDiv {
+.titleDiv {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
 
-#descriptionDiv {
+.descriptionDiv {
     grid-column: 1 / 3;
     grid-row: 2 / 3;
 }
 
-#dueDateDiv {
+.dueDateDiv {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
 }
 
-#priorityDiv {
+.priorityDiv {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
 }
 
-#projectSelectionDiv {
+.projectSelectionDiv {
     grid-column: 1 / 2;
     grid-row: 4 / 5;
 }
 
-#buttonDiv {
+.buttonDiv {
     grid-column: 2 / 3;
     grid-row: 4 / 5;
 }
