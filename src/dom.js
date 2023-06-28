@@ -24,6 +24,10 @@ function createForm () {
     let titleLabel = document.createElement("label");
     titleLabel.setAttribute("for", "title");
     titleLabel.textContent = "Title";
+    let titleDiv = document.createElement("div");
+    titleDiv.setAttribute("id", "titleDiv");
+    titleDiv.appendChild(titleLabel);
+    titleDiv.appendChild(title);
 
     //description input field
     let description = document.createElement("input");
@@ -33,6 +37,10 @@ function createForm () {
     let descriptionLabel = document.createElement("label");
     descriptionLabel.setAttribute("for", "description");
     descriptionLabel.textContent = "Description";
+    let descriptionDiv = document.createElement("div");
+    descriptionDiv.setAttribute("id", "descriptionDiv");
+    descriptionDiv.appendChild(descriptionLabel);
+    descriptionDiv.appendChild(description);
 
     //dueDate input field
     let dueDate = document.createElement("input");
@@ -43,6 +51,10 @@ function createForm () {
     let dueDateLabel = document.createElement("label");
     dueDateLabel.setAttribute("for", "dueDate");
     dueDateLabel.textContent = "Due Date";
+    let dueDateDiv = document.createElement("div");
+    dueDateDiv.setAttribute("id", "dueDateDiv");
+    dueDateDiv.appendChild(dueDateLabel);
+    dueDateDiv.appendChild(dueDate);
 
     //priority input field
     let priority = document.createElement("select");
@@ -63,6 +75,10 @@ function createForm () {
     priority.appendChild(priorityOne);
     priority.appendChild(priorityTwo);
     priority.appendChild(priorityThree);
+    let priorityDiv = document.createElement("div");
+    priorityDiv.setAttribute("id", "priorityDiv");
+    priorityDiv.appendChild(priorityLabel);
+    priorityDiv.appendChild(priority);
 
     //submitbutton
     let submitButton = document.createElement("button");
@@ -90,15 +106,16 @@ function createForm () {
         }
     });
 
+    let buttonsDiv = document.createElement("div");
+    buttonsDiv.setAttribute("id", "buttonDiv");
+    buttonsDiv.appendChild(submitButton);
+    buttonsDiv.appendChild(cancelButton);
+
     mainBody.prepend(form);
-    form.appendChild(titleLabel);
-    form.appendChild(title);
-    form.appendChild(descriptionLabel);
-    form.appendChild(description);
-    form.appendChild(dueDateLabel);
-    form.appendChild(dueDate);
-    form.appendChild(priorityLabel);
-    form.appendChild(priority);
+    form.appendChild(titleDiv);
+    form.appendChild(descriptionDiv);
+    form.appendChild(dueDateDiv);
+    form.appendChild(priorityDiv);
     
     //project input field
     //checks whether the user is on a project page and then 
@@ -121,11 +138,13 @@ function createForm () {
             projectSelection.appendChild(option);
             }
         
-        form.appendChild(projectSelectionLabel);
-        form.appendChild(projectSelection);
+        let projectSelectionDiv = document.createElement("div");
+        projectSelectionDiv.appendChild(projectSelectionLabel);
+        projectSelectionDiv.appendChild(projectSelection);
+        projectSelectionDiv.setAttribute("id", "projectSelectionDiv");
+        form.appendChild(projectSelectionDiv);
     }
-    form.appendChild(submitButton);
-    form.appendChild(cancelButton);
+    form.appendChild(buttonsDiv);
 }
 
 //function to create a form that allows users to create a new project
