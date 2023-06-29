@@ -193,32 +193,62 @@ function createCard(todo) {
         let mainBody = document.getElementById("mainBody");
         let toDoCard = document.createElement("div");
         toDoCard.setAttribute("class", "card");
+
         let title = document.createElement("p");
         title.textContent = todo.title;
-        let titleDiv = createElement("div");
+        let titleLabel = document.createElement("label");
+        titleLabel.textContent = "Title";
+        let titleDiv = document.createElement("div");
         titleDiv.setAttribute("class", "titleDiv");
+        titleDiv.appendChild(titleLabel);
         titleDiv.appendChild(title);
         toDoCard.appendChild(titleDiv);
+
         let description = document.createElement("p");
         description.textContent = todo.description;
-        toDoCard.appendChild(description);
+        let descriptionLabel = document.createElement("label");
+        descriptionLabel.textContent = "Description";
+        let descriptionDiv = document.createElement("div");
+        descriptionDiv.setAttribute("class", "descriptionDiv");
+        descriptionDiv.appendChild(descriptionLabel);
+        descriptionDiv.appendChild(description);
+        toDoCard.appendChild(descriptionDiv);
+
         let dueDate = document.createElement("p");
         dueDate.textContent = `${format(todo.dueDate, "EEEE d MMMM yyyy")}`;
-        toDoCard.appendChild(dueDate);
+        let dueDateLabel = document.createElement("label");
+        dueDateLabel.textContent = "Due Date";
+        let dueDateDiv = document.createElement("div");
+        dueDateDiv.setAttribute("class", "dueDateDiv");
+        dueDateDiv.appendChild(dueDateLabel);
+        dueDateDiv.appendChild(dueDate);
+        toDoCard.appendChild(dueDateDiv);
+
         let priority = document.createElement("p");
+        let priorityLabel = document.createElement("label");
+        priorityLabel.textContent = "Priority";
+        let priorityDiv = document.createElement("div");
+        priorityDiv.setAttribute("class", "priorityDiv");
+        priorityDiv.appendChild(priorityLabel);
+        priorityDiv.appendChild(priority);
+        toDoCard.appendChild(priorityDiv);
         if (todo.priority === 1) {
             priority.textContent = "High";
-            toDoCard.appendChild(priority);
         } else if (todo.priority === 2) {
             priority.textContent = "Medium";
-            toDoCard.appendChild(priority);
         } else {
             priority.textContent = "Low";
-            toDoCard.appendChild(priority);
-        }
+        };
+
         let project = document.createElement("p");
         project.textContent = todo.project;
-        toDoCard.appendChild(project);
+        let projectSelectionLabel = document.createElement("label");
+        projectSelectionLabel.textContent =  "Project";
+        let projectDiv = document.createElement("div");
+        projectDiv.setAttribute("class", "projectSelectionDiv");
+        projectDiv.appendChild(projectSelectionLabel);
+        projectDiv.appendChild(project);
+        toDoCard.appendChild(projectDiv);
         mainBody.appendChild(toDoCard);
 }
 
