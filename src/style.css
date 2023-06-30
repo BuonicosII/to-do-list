@@ -45,7 +45,7 @@ table {
 body {
     display: grid;
     grid-template-rows: 6vh auto;
-    grid-template-columns: 12vw auto;
+    grid-template-columns: 14vw auto;
     height: 100vh;
     margin: 0;
 }
@@ -62,7 +62,16 @@ html {
 }
 
 input {
+    appearance: none;
     height: 1vh;
+    padding: 0.5vh;
+    border-radius: 0.5vh;
+    border: 1px solid black;
+}
+
+select {
+    appearance: none;
+    height: auto;
     padding: 0.5vh;
     border-radius: 0.5vh;
     border: 1px solid black;
@@ -91,9 +100,9 @@ input {
     display: flex;
     flex-direction: column;
     align-items:flex-start;
-    padding: 2vh;
-    padding-left: 3vh;
-    gap: 1.7vh;
+    padding: 2vw;
+    padding-left: 1.5vw;
+    gap: 1vw;
 }
 
 #leftShoulder .interactable {
@@ -102,7 +111,7 @@ input {
 }
 
 #leftShoulder p {
-    font-size: 1.7vh;
+    font-size: 1vw;
 }
 
 #leftShoulder .interactable:hover {
@@ -125,9 +134,9 @@ input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 2vh;
-    padding-left: 4vh;
-    gap: 1.7vh;
+    padding: 2vw;
+    padding-left: 2vw;
+    gap: 1vw;
 }
 
 #mainBody {
@@ -147,7 +156,7 @@ input {
     border: solid black 1px; 
     border-radius: 1vh;
     padding: 2vh;
-    height: 16vh;
+    height: 18vh;
     width: 16vw;
     box-shadow: 5px 5px 10px grey;
     background-color: white;
@@ -165,7 +174,7 @@ input {
     border: solid black 1px; 
     border-radius: 1vh;
     padding: 2vh;
-    height: 16vh;
+    height: 18vh;
     width: 16vw;
     box-shadow: 5px 5px 10px grey;
     background-color: lightgray;
@@ -184,7 +193,7 @@ input {
     border: solid black 1px; 
     border-radius: 1vh;
     padding: 2vh;
-    height: 16vh;
+    height: 18vh;
     width: 16vw;
     box-shadow: 5px 5px 10px grey;
     background-color: white;
@@ -252,5 +261,18 @@ input {
     grid-column: 2 / 3;
     grid-row: 4 / 5;
     justify-self: center;
+    width: 100%;
+    justify-content: space-around;
+    padding: 1vh;
+    padding-bottom: 0px;
+    gap: 1vh;
+}
+
+.buttonDiv button {
+    appearance: none;
+    height: 100%;
+    padding: 0.5vh;
+    border-radius: 0.5vh;
+    border: 1px solid black;
 }
 

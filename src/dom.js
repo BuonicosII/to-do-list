@@ -193,6 +193,7 @@ function createCard(todo) {
         let mainBody = document.getElementById("mainBody");
         let toDoCard = document.createElement("div");
         toDoCard.setAttribute("class", "card");
+        toDoCard.setAttribute("id", `${todo.title}`)
 
         let title = document.createElement("p");
         title.textContent = todo.title;
@@ -249,6 +250,11 @@ function createCard(todo) {
         projectDiv.appendChild(projectSelectionLabel);
         projectDiv.appendChild(project);
         toDoCard.appendChild(projectDiv);
+
+        let editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.addEventListener("click", editCard);
+        toDoCard.appendChild(editBtn);
         mainBody.appendChild(toDoCard);
 }
 
@@ -376,6 +382,15 @@ function dueDateIsThisWeek() {
             createCard(todo);
         }
     }
+}
+
+//function to edit the toDo in the cards
+
+function editCard (event) {
+    let cardToEmpty = event.target.parentNode;
+    while (cardToEmpty.hasChildNodes()) {
+        cardToEmpty.removeChild(cardToEmpty.firstChild);
+    };
 }
 
 
