@@ -395,6 +395,12 @@ function editCard (event) {
     mainBody.firstChild.removeEventListener("click", createForm);
 
     //retrieve toDoInfos from the allTasks array (name and project ) for later use
+    let thisToDo = allToDos.find(({ title }) => title === toDoId);
+
+    let oldTodoProject = allProjects.find(({ id }) => id === thisToDo.project);
+    let oldToDo = oldTodoProject.find(({ title }) => title === toDoId);
+
+    console.log(oldToDo, oldTodoProject);
 
     //create a form with precompiled inputs based on the doTo infos and a custom event listener
 
