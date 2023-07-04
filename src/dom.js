@@ -387,10 +387,27 @@ function dueDateIsThisWeek() {
 //function to edit the toDo in the cards
 
 function editCard (event) {
+    let mainBody = document.getElementById("mainBody");
     let cardToEmpty = event.target.parentNode;
-    while (cardToEmpty.hasChildNodes()) {
-        cardToEmpty.removeChild(cardToEmpty.firstChild);
-    };
+    let toDoId = event.target.parentNode.id;
+
+    //remove create Event Listener to prevent user from editing a todo and create a new one at the same time
+    mainBody.firstChild.removeEventListener("click", createForm);
+
+    //retrieve toDoInfos from the allTasks array (name and project ) for later use
+
+    //create a form with precompiled inputs based on the doTo infos and a custom event listener
+
+    //event listener function should: 
+    //1 - edit the toDo into the AllTasks array 
+    //2 - remove the old todo from the old corresponding project array
+    //3 - copy the edited toDo in the corresponding project array 
+    //4 - call either all tasks or display toDos in project
+
+    //prepend the form to the event.target.parentNode
+
+    //remove the event.target.parentNode
+
 }
 
 
