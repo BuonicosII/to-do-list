@@ -404,6 +404,154 @@ function editCard (event) {
 
     //create a form with precompiled inputs based on the doTo infos and a custom event listener
 
+    let form = document.createElement("form");
+    form.setAttribute("action", "");
+    form.setAttribute("id", "editToDoForm");
+
+    //title input field
+    let title = document.createElement("input");
+    title.setAttribute("type", "text");
+    title.setAttribute("id", "title");
+    title.setAttribute("name", "title");
+    title.setAttribute("value", `${thisToDo.title}`);
+    title.required = true;
+    let titleLabel = document.createElement("label");
+    titleLabel.setAttribute("for", "title");
+    titleLabel.textContent = "Title";
+    let titleDiv = document.createElement("div");
+    titleDiv.setAttribute("class", "titleDiv");
+    titleDiv.appendChild(titleLabel);
+    titleDiv.appendChild(title);
+
+    //description input field
+    let description = document.createElement("input");
+    description.setAttribute("type", "text");
+    description.setAttribute("id", "description");
+    description.setAttribute("name", "description");
+    description.setAttribute("value", `${thisToDo.description}`);
+    let descriptionLabel = document.createElement("label");
+    descriptionLabel.setAttribute("for", "description");
+    descriptionLabel.textContent = "Description";
+    let descriptionDiv = document.createElement("div");
+    descriptionDiv.setAttribute("class", "descriptionDiv");
+    descriptionDiv.appendChild(descriptionLabel);
+    descriptionDiv.appendChild(description);
+
+    //dueDate input field
+    let dueDate = document.createElement("input");
+    dueDate.setAttribute("type", "date");
+    dueDate.setAttribute("id", "dueDate");
+    dueDate.setAttribute("name", "dueDate");
+    dueDate.setAttribute("value", `${thisToDo.dueDate}`);
+    dueDate.required = true;
+    let dueDateLabel = document.createElement("label");
+    dueDateLabel.setAttribute("for", "dueDate");
+    dueDateLabel.textContent = "Due Date";
+    let dueDateDiv = document.createElement("div");
+    dueDateDiv.setAttribute("class", "dueDateDiv");
+    dueDateDiv.appendChild(dueDateLabel);
+    dueDateDiv.appendChild(dueDate);
+
+    //priority input field
+    let priority = document.createElement("select");
+    priority.setAttribute("id", "priority");
+    priority.required = true;
+    let priorityLabel = document.createElement("label");
+    priorityLabel.setAttribute("for", "priority");
+    priorityLabel.textContent = "Priority";
+    let priorityOne = document.createElement("option");
+    priorityOne.setAttribute("value", "1");
+    priorityOne.textContent = "High";
+    let priorityTwo = document.createElement("option");
+    priorityTwo.setAttribute("value", "2");
+    priorityTwo.textContent = "Medium";
+    let priorityThree = document.createElement("option");
+    priorityThree.setAttribute("value", "3");
+    priorityThree.textContent = "Low";
+    priority.appendChild(priorityOne);
+    priority.appendChild(priorityTwo);
+    priority.appendChild(priorityThree);
+
+    //autoselect the current toDo priority
+
+    if (thisToDo.priority === 1) {
+        priorityOne.setAttribute("selected", "selected");
+    } else if (thisToDo.priority === 2) {
+        priorityTwo.setAttribute("selected", "selected");
+    } else {
+        priorityThree.setAttribute("selected", "selected");
+    }
+
+    let priorityDiv = document.createElement("div");
+    priorityDiv.setAttribute("class", "priorityDiv");
+    priorityDiv.appendChild(priorityLabel);
+    priorityDiv.appendChild(priority);
+
+    //submitbutton
+    let submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("id", "submitButton");
+    submitButton.setAttribute("form", "editToDoForm");
+    submitButton.textContent = "Edit";
+    submitButton.addEventListener("click", () => {
+        if (currentProject !== undefined) {
+            displayTodosInProject();
+        } else {
+            allTasks();
+        }
+    });
+
+    //cancelbutton
+    let cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.addEventListener("click", () => {
+        if (currentProject !== undefined) {
+            displayTodosInProject();
+        } else {
+            allTasks();
+        }
+    });
+
+    let buttonsDiv = document.createElement("div");
+    buttonsDiv.setAttribute("class", "buttonDiv");
+    buttonsDiv.appendChild(submitButton);
+    buttonsDiv.appendChild(cancelButton);
+
+    mainBody.prepend(form);
+    form.appendChild(titleDiv);
+    form.appendChild(descriptionDiv);
+    form.appendChild(dueDateDiv);
+    form.appendChild(priorityDiv);
+    
+    //project input field
+    //checks whether the user is on a project page and then 
+
+    if (currentProject === undefined) {
+        let projectSelection = document.createElement("select");
+        projectSelection.setAttribute("id", "projectSelection");
+        let projectSelectionLabel = document.createElement("label");
+        projectSelectionLabel.setAttribute("for", "projectSelection");
+        projectSelectionLabel.textContent =  "Project";
+
+        let noneOption = document.createElement("option");
+        noneOption.textContent = " - ";
+        projectSelection.appendChild(noneOption);
+    
+        for (const item of allProjects) {
+            let option = document.createElement("option");
+            option.setAttribute("value", `${item.id}`);
+            option.textContent = `${item.id}`;
+            projectSelection.appendChild(option);
+            }
+        
+        let projectSelectionDiv = document.createElement("div");
+        projectSelectionDiv.appendChild(projectSelectionLabel);
+        projectSelectionDiv.appendChild(projectSelection);
+        projectSelectionDiv.setAttribute("class", "projectSelectionDiv");
+        form.appendChild(projectSelectionDiv);
+    }
+    form.appendChild(buttonsDiv);
+
     //event listener function should: 
     //1 - edit the toDo into the AllTasks array 
     //2 - remove the old todo from the old corresponding project array
