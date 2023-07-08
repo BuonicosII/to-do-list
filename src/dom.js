@@ -397,10 +397,9 @@ function editCard (event) {
     //retrieve toDoInfos from the allTasks array (name and project ) for later use
     let thisToDo = allToDos.find(({ title }) => title === toDoId);
 
-    let oldTodoProject = allProjects.find(({ id }) => id === thisToDo.project);
-    let oldToDo = oldTodoProject.find(({ title }) => title === toDoId);
-
-    console.log(oldToDo, oldTodoProject);
+    //let oldTodoProject = allProjects.find(({ id }) => id === thisToDo.project);
+    //let oldToDo = oldTodoProject.find(({ title }) => title === toDoId);
+    //let oldIndex = oldTodoProject.indexOf(({ title }) => title === toDoId)
 
     //create a form with precompiled inputs based on the doTo infos and a custom event listener
 
@@ -487,13 +486,65 @@ function editCard (event) {
     priorityDiv.appendChild(priorityLabel);
     priorityDiv.appendChild(priority);
 
+    //project input field
+    //checks whether the user is on a project page and then 
+
+
+    let projectSelection = document.createElement("select");
+    projectSelection.setAttribute("id", "projectSelection");
+    let projectSelectionLabel = document.createElement("label");
+    projectSelectionLabel.setAttribute("for", "projectSelection");
+    projectSelectionLabel.textContent =  "Project";
+
+    let noneOption = document.createElement("option");
+    noneOption.textContent = " - ";
+    projectSelection.appendChild(noneOption);
+    
+    for (const item of allProjects) {
+        let option = document.createElement("option");
+        option.setAttribute("value", `${item.id}`);
+        option.textContent = `${item.id}`;
+        projectSelection.appendChild(option);
+        if (item.id === thisToDo.project) {
+            option.setAttribute("selected", "selected");
+        }
+        }
+        
+    let projectSelectionDiv = document.createElement("div");
+    projectSelectionDiv.appendChild(projectSelectionLabel);
+    projectSelectionDiv.appendChild(projectSelection);
+    projectSelectionDiv.setAttribute("class", "projectSelectionDiv");
+
     //submitbutton
     let submitButton = document.createElement("button");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("id", "submitButton");
     submitButton.setAttribute("form", "editToDoForm");
-    submitButton.textContent = "Edit";
+    submitButton.textContent = "Save Changes";
     submitButton.addEventListener("click", () => {
+
+        //event.preventDefault();
+
+        //1 - edit the toDo into the AllTasks array 
+        thisToDo.setTitle = title.value;
+        thisToDo.setDescription = description.value;
+        //thisToDo.setDueDate = dueDate.value;
+        thisToDo.setPriority = priority.value;
+        //thisToDo.setProject = projectSelection.value;
+
+        //2 - remove the old todo from the old corresponding project array
+    //    oldTodoProject.splice(oldIndex, 1);
+
+        //3 - copy the edited toDo in the corresponding project array 
+
+    //    if (allProjects.findIndex(object => { return object.id === `${projectSelection.value}`}) !== -1) {
+    //        allProjects.find(object => {
+    //            return object.id === `${projectSelection.value}`
+    //          }).push(thisToDo);
+    //    };
+        console.log(thisToDo, oldToDo)
+        //4 - call either all tasks or display toDos in project
+
         if (currentProject !== undefined) {
             displayTodosInProject();
         } else {
@@ -517,51 +568,18 @@ function editCard (event) {
     buttonsDiv.appendChild(submitButton);
     buttonsDiv.appendChild(cancelButton);
 
-    mainBody.prepend(form);
     form.appendChild(titleDiv);
     form.appendChild(descriptionDiv);
-    form.appendChild(dueDateDiv);
+    //form.appendChild(dueDateDiv);
     form.appendChild(priorityDiv);
-    
-    //project input field
-    //checks whether the user is on a project page and then 
-
-    if (currentProject === undefined) {
-        let projectSelection = document.createElement("select");
-        projectSelection.setAttribute("id", "projectSelection");
-        let projectSelectionLabel = document.createElement("label");
-        projectSelectionLabel.setAttribute("for", "projectSelection");
-        projectSelectionLabel.textContent =  "Project";
-
-        let noneOption = document.createElement("option");
-        noneOption.textContent = " - ";
-        projectSelection.appendChild(noneOption);
-    
-        for (const item of allProjects) {
-            let option = document.createElement("option");
-            option.setAttribute("value", `${item.id}`);
-            option.textContent = `${item.id}`;
-            projectSelection.appendChild(option);
-            }
-        
-        let projectSelectionDiv = document.createElement("div");
-        projectSelectionDiv.appendChild(projectSelectionLabel);
-        projectSelectionDiv.appendChild(projectSelection);
-        projectSelectionDiv.setAttribute("class", "projectSelectionDiv");
-        form.appendChild(projectSelectionDiv);
-    }
+    form.appendChild(projectSelectionDiv);
     form.appendChild(buttonsDiv);
-
-    //event listener function should: 
-    //1 - edit the toDo into the AllTasks array 
-    //2 - remove the old todo from the old corresponding project array
-    //3 - copy the edited toDo in the corresponding project array 
-    //4 - call either all tasks or display toDos in project
 
     //prepend the form to the event.target.parentNode
 
+    mainBody.insertBefore(form, cardToEmpty);
     //remove the event.target.parentNode
-
+    cardToEmpty.remove();
 }
 
 
