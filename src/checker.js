@@ -38,4 +38,4 @@ allProjects.push(resolution, rammstein);
 //    return currentProject;
 //}
 
-export { allToDos, allProjects, currentProject }
+export { allToDos, allProjects, currentProject, resolution }

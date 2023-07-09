@@ -1,4 +1,4 @@
-import { allToDos, allProjects, currentProject } from "./checker";
+import { allToDos, allProjects, currentProject, resolution} from "./checker";
 import { createToDo, createProject } from "./events";
 import { format } from "date-fns";
 
@@ -394,15 +394,11 @@ function editCard (event) {
     //remove create Event Listener to prevent user from editing a todo and create a new one at the same time
     mainBody.firstChild.removeEventListener("click", createForm);
 
-    //retrieve toDoInfos from the allTasks array (name and project ) for later use
+    //retrieve toDoInfos from the allToDoS array
     let thisToDo = allToDos.find(({ title }) => title === toDoId);
 
-    //let oldTodoProject = allProjects.find(({ id }) => id === thisToDo.project);
-    //let oldToDo = oldTodoProject.find(({ title }) => title === toDoId);
-    //let oldIndex = oldTodoProject.indexOf(({ title }) => title === toDoId)
-
     //create a form with precompiled inputs based on the doTo infos and a custom event listener
-
+    
     let form = document.createElement("form");
     form.setAttribute("action", "");
     form.setAttribute("id", "editToDoForm");
@@ -487,7 +483,6 @@ function editCard (event) {
     priorityDiv.appendChild(priority);
 
     //project input field
-    //checks whether the user is on a project page and then 
 
 
     let projectSelection = document.createElement("select");
@@ -523,33 +518,42 @@ function editCard (event) {
     submitButton.textContent = "Save Changes";
     submitButton.addEventListener("click", () => {
 
-        //event.preventDefault();
+        event.preventDefault();
 
-        //1 - edit the toDo into the AllTasks array 
+        //1 - remove the old todo from the old corresponding project array
+
+        let oldTodoProject = allProjects.find(({ id }) => id === thisToDo.project);
+        console.log(oldTodoProject);
+        let oldIndex = oldTodoProject.findIndex(({ title }) => title === thisToDo.title);
+        console.log(oldIndex);
+        oldTodoProject.splice(`${oldIndex}`, 1);
+
+        
+        //2 - edit the toDo into the AllTasks array 
         thisToDo.setTitle = title.value;
         thisToDo.setDescription = description.value;
         //thisToDo.setDueDate = dueDate.value;
         thisToDo.setPriority = priority.value;
-        //thisToDo.setProject = projectSelection.value;
-
-        //2 - remove the old todo from the old corresponding project array
-    //    oldTodoProject.splice(oldIndex, 1);
-
+        thisToDo.setProject = projectSelection.value;
+        
         //3 - copy the edited toDo in the corresponding project array 
-
-    //    if (allProjects.findIndex(object => { return object.id === `${projectSelection.value}`}) !== -1) {
-    //        allProjects.find(object => {
-    //            return object.id === `${projectSelection.value}`
-    //          }).push(thisToDo);
-    //    };
-        console.log(thisToDo, oldToDo)
+    
+        if (allProjects.findIndex(object => { return object.id === `${thisToDo.project}`}) !== -1) {
+            let newTodoProject = allProjects.find(object => { return object.id === `${thisToDo.project}`
+              })
+                            
+              newTodoProject.push(thisToDo);
+              console.log(newTodoProject)
+        };
+      
         //4 - call either all tasks or display toDos in project
-
+        
         if (currentProject !== undefined) {
             displayTodosInProject();
         } else {
             allTasks();
         }
+        
     });
 
     //cancelbutton
@@ -580,6 +584,7 @@ function editCard (event) {
     mainBody.insertBefore(form, cardToEmpty);
     //remove the event.target.parentNode
     cardToEmpty.remove();
+    
 }
 
 
