@@ -21,7 +21,7 @@ class ToDo {
     }
 
     set setPriority(value) {
-        this.priority = value;
+        this.priority = Number(value);
     }
 
     set setProject(value) {

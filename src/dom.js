@@ -437,7 +437,6 @@ function editCard (event) {
     dueDate.setAttribute("type", "date");
     dueDate.setAttribute("id", "dueDate");
     dueDate.setAttribute("name", "dueDate");
-    console.log(format(thisToDo.dueDate, "yyyy-MM-dd"));
     dueDate.setAttribute("value", `${format(thisToDo.dueDate, "yyyy-MM-dd")}`);
     dueDate.required = true;
     let dueDateLabel = document.createElement("label");
@@ -524,9 +523,7 @@ function editCard (event) {
         //1 - remove the old todo from the old corresponding project array
 
         let oldTodoProject = allProjects.find(({ id }) => id === thisToDo.project);
-        console.log(oldTodoProject);
         let oldIndex = oldTodoProject.findIndex(({ title }) => title === thisToDo.title);
-        console.log(oldIndex);
         oldTodoProject.splice(`${oldIndex}`, 1);
 
         
@@ -536,6 +533,7 @@ function editCard (event) {
         thisToDo.setDueDate = dueDate.value;
         thisToDo.setPriority = priority.value;
         thisToDo.setProject = projectSelection.value;
+        console.log(typeof thisToDo.priority);
         
         //3 - copy the edited toDo in the corresponding project array 
     
@@ -544,7 +542,6 @@ function editCard (event) {
               })
                             
               newTodoProject.push(thisToDo);
-              console.log(newTodoProject)
         };
       
         //4 - call either all tasks or display toDos in project
