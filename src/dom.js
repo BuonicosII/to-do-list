@@ -437,7 +437,8 @@ function editCard (event) {
     dueDate.setAttribute("type", "date");
     dueDate.setAttribute("id", "dueDate");
     dueDate.setAttribute("name", "dueDate");
-    dueDate.setAttribute("value", `${thisToDo.dueDate}`);
+    console.log(format(thisToDo.dueDate, "yyyy-MM-dd"));
+    dueDate.setAttribute("value", `${format(thisToDo.dueDate, "yyyy-MM-dd")}`);
     dueDate.required = true;
     let dueDateLabel = document.createElement("label");
     dueDateLabel.setAttribute("for", "dueDate");
@@ -532,7 +533,7 @@ function editCard (event) {
         //2 - edit the toDo into the AllTasks array 
         thisToDo.setTitle = title.value;
         thisToDo.setDescription = description.value;
-        //thisToDo.setDueDate = dueDate.value;
+        thisToDo.setDueDate = dueDate.value;
         thisToDo.setPriority = priority.value;
         thisToDo.setProject = projectSelection.value;
         
@@ -574,7 +575,7 @@ function editCard (event) {
 
     form.appendChild(titleDiv);
     form.appendChild(descriptionDiv);
-    //form.appendChild(dueDateDiv);
+    form.appendChild(dueDateDiv);
     form.appendChild(priorityDiv);
     form.appendChild(projectSelectionDiv);
     form.appendChild(buttonsDiv);

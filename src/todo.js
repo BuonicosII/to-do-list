@@ -17,7 +17,7 @@ class ToDo {
     }
 
     set setDueDate(value) {
-        this.dueDate = value;
+        this.dueDate = new Date(value);
     }
 
     set setPriority(value) {
