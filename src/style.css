@@ -249,7 +249,8 @@ select {
 .priorityDiv {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
-    justify-self: center;
+    justify-self: right;
+    flex-direction: column;
 }
 
 .projectSelectionDiv {
@@ -266,6 +267,7 @@ select {
     padding: 1vh;
     padding-bottom: 0px;
     gap: 1vh;
+    display: flex;
 }
 
 .buttonDiv button {

@@ -251,10 +251,19 @@ function createCard(todo) {
         projectDiv.appendChild(project);
         toDoCard.appendChild(projectDiv);
 
+
         let editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
         editBtn.addEventListener("click", editCard);
-        toDoCard.appendChild(editBtn);
+        let eraseToDoBtn = document.createElement("button");
+        eraseToDoBtn.textContent = "Erase";
+
+        let buttonsDiv = document.createElement("div");
+        buttonsDiv.setAttribute("class", "buttonDiv");
+        buttonsDiv.appendChild(eraseToDoBtn);
+        buttonsDiv.appendChild(editBtn);
+        toDoCard.appendChild(buttonsDiv);
+
         mainBody.appendChild(toDoCard);
 }
 
@@ -388,8 +397,8 @@ function dueDateIsThisWeek() {
 
 function editCard (event) {
     let mainBody = document.getElementById("mainBody");
-    let cardToEmpty = event.target.parentNode;
-    let toDoId = event.target.parentNode.id;
+    let cardToEmpty = event.target.parentNode.parentNode;
+    let toDoId = event.target.parentNode.parentNode.id;
 
     //remove create Event Listener to prevent user from editing a todo and create a new one at the same time
     mainBody.firstChild.removeEventListener("click", createForm);
