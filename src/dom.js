@@ -416,6 +416,17 @@ function eraseToDo (event) {
     }
 }
 
+function eraseProject (event) {
+    let projectToBeErased 
+    if (allToDos.findIndex(({ project }) => project === projectToBeErased) !== -1) {
+        alert("You can't cancel an unempty project. Make sure the project is empty first!")
+    } else {
+        let projectIndex = allProjects.findIndex(( { id } ) => id === projectToBeErased);
+        allProjects.splice(`${projectIndex}`, 1);
+    }
+
+    displayAllProjects();
+}
 
 //function to edit the toDo in the cards
 
