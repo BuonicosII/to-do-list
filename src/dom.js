@@ -314,11 +314,22 @@ function displayAllProjects() {
     projectList.appendChild(addProjectBtn);
 
     for (const project of allProjects) {
+        let projectDiv = document.createElement ("div");
+        projectDiv.setAttribute("id", `${project.id}`);
+        projectDiv.setAttribute("class", "projectDiv");
+
         let projectListing = document.createElement("p");
         projectListing.textContent = project.id;
         projectListing.setAttribute("class", "interactable");
-        projectList.appendChild(projectListing);
-        projectListing.addEventListener("click", displayTodosInProjectShoulder)
+        projectListing.addEventListener("click", displayTodosInProjectShoulder);
+
+        let cancelProjectBtn = document.createElement("p");
+        cancelProjectBtn.textContent = "✕";
+        cancelProjectBtn.addEventListener("click", eraseProject);
+
+        projectList.appendChild(projectDiv);
+        projectDiv.appendChild(projectListing);
+        projectDiv.appendChild(cancelProjectBtn);
     }
 
 }
@@ -417,7 +428,7 @@ function eraseToDo (event) {
 }
 
 function eraseProject (event) {
-    let projectToBeErased 
+    let projectToBeErased = event.target.parentNode.id;
     if (allToDos.findIndex(({ project }) => project === projectToBeErased) !== -1) {
         alert("You can't cancel an unempty project. Make sure the project is empty first!")
     } else {
