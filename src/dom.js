@@ -257,6 +257,7 @@ function createCard(todo) {
         editBtn.addEventListener("click", editCard);
         let eraseToDoBtn = document.createElement("button");
         eraseToDoBtn.textContent = "Erase";
+        eraseToDoBtn.addEventListener("click", eraseToDo);
 
         let buttonsDiv = document.createElement("div");
         buttonsDiv.setAttribute("class", "buttonDiv");
@@ -392,6 +393,29 @@ function dueDateIsThisWeek() {
         }
     }
 }
+
+//function to erase the toDo
+
+function eraseToDo (event) {
+    let toDoId = event.target.parentNode.parentNode.id;
+    let toDotoRemove = allToDos.find(({ title }) => title === toDoId);
+
+    //remove toDo from a certain project
+    let removeFromTodoProject = allProjects.find(({ id }) => id === toDotoRemove.project);
+    let currentProjectIndex = removeFromTodoProject.findIndex(({ title }) => title === toDotoRemove.title);
+    removeFromTodoProject.splice(`${currentProjectIndex}`, 1);
+
+    //remove toDo from allToDos array
+    let generalIndex = allToDos.findIndex(({ title }) => title === toDotoRemove.title);
+    allToDos.splice(`${generalIndex}`, 1);
+
+    if (currentProject !== undefined) {
+        displayTodosInProject();
+    } else {
+        allTasks();
+    }
+}
+
 
 //function to edit the toDo in the cards
 

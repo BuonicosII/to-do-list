@@ -168,6 +168,10 @@ select {
 
 .card p {
     margin-top: 0.5vh;
+    padding: 0.5vh;
+    padding-left: 0;
+    height: 1vh;
+    border: 1px;
 }
 
 .newTaskBtn {
@@ -263,7 +267,7 @@ select {
     grid-row: 4 / 5;
     justify-self: center;
     width: 100%;
-    justify-content: space-around;
+    justify-content: right;
     padding: 1vh;
     padding-bottom: 0px;
     gap: 1vh;
@@ -273,6 +277,7 @@ select {
 .buttonDiv button {
     appearance: none;
     height: 100%;
+    min-width: 3vw;
     padding: 0.5vh;
     border-radius: 0.5vh;
     border: 1px solid black;
