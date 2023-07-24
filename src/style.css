@@ -128,7 +128,16 @@ select {
 
 #leftShoulder input {
     width: 100%;
-} 
+}
+
+#leftShoulder button {
+    appearance: none;
+    height: 3vh;
+    min-width: 3.5vw;
+    padding: 0.5vh;
+    border-radius: 0.5vh;
+    border: 1px solid black;
+}
 
 #projectList {
     display: flex;
@@ -291,13 +300,46 @@ select {
 }
 
 .low {
-    box-shadow: inset -4px 0 rgba(48, 138, 48, 0.65)
+    box-shadow: inset -4px 0 rgba(48, 138, 48, 0.65), 5px 5px 10px grey;
 }
 
 .medium {
-    box-shadow: inset -4px 0 rgba(136, 138, 48, 0.65)
+    box-shadow: inset -4px 0 rgba(136, 138, 48, 0.65), 5px 5px 10px grey;
 }
 
 .high {
-    box-shadow: inset -4px 0 rgba(138, 48, 48, 0.65)
+    box-shadow: inset -4px 0 rgba(138, 48, 48, 0.65), 5px 5px 10px grey;
+}
+
+.eraseBtn:hover {
+    transition: background-color 650ms linear;
+    background-color: rgb(196, 31, 31);
+    color: azure;
+    font-weight: bold;
+}
+
+.editBtn:hover {
+    transition: background-color 650ms linear;
+    background-color: rgb(0, 114, 185);
+    color: azure;
+    font-weight: bold;
+}
+
+.cancelBtn:hover {
+    transition: background-color 650ms linear;
+    background-color: rgb(185, 151, 0);
+    color: azure;
+    font-weight: bold;
+}
+
+.confirmBtn:hover {
+    transition: background-color 650ms linear;
+    background-color: rgb(11, 128, 0);
+    color: azure;
+    font-weight: bold;
+}
+
+.cancelX:hover {
+    transition: color 650ms linear;
+    color: rgb(196, 31, 31);
 }

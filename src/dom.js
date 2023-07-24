@@ -172,12 +172,14 @@ function createProjectForm () {
     submitButton.setAttribute("id", "submitButton");
     submitButton.setAttribute("form", "projectForm");
     submitButton.textContent = "Add";
+    submitButton.classList.add("confirmBtn");
     submitButton.addEventListener("click", createProject);
     submitButton.addEventListener("click", displayAllProjects);
     
     //cancelButton
     let cancelButton = document.createElement("button");
     cancelButton.textContent = "Cancel";
+    cancelButton.classList.add("cancelBtn");
     cancelButton.addEventListener("click", displayAllProjects);
 
     form.appendChild(projectNameLabel);
@@ -257,9 +259,11 @@ function createCard(todo) {
 
         let editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
+        editBtn.classList.add("editBtn");
         editBtn.addEventListener("click", editCard);
         let eraseToDoBtn = document.createElement("button");
         eraseToDoBtn.textContent = "Erase";
+        eraseToDoBtn.classList.add("eraseBtn");
         eraseToDoBtn.addEventListener("click", eraseToDo);
 
         let buttonsDiv = document.createElement("div");
@@ -314,6 +318,7 @@ function displayAllProjects() {
     let addProjectBtn = document.createElement("button");
     addProjectBtn.textContent = "Add Project";
     addProjectBtn.addEventListener("click", createProjectForm);
+    addProjectBtn.classList.add("editBtn")
     projectList.appendChild(addProjectBtn);
 
     for (const project of allProjects) {
@@ -328,6 +333,7 @@ function displayAllProjects() {
 
         let cancelProjectBtn = document.createElement("p");
         cancelProjectBtn.textContent = "✕";
+        cancelProjectBtn.classList.add("cancelX");
         cancelProjectBtn.addEventListener("click", eraseProject);
 
         projectList.appendChild(projectDiv);
@@ -573,6 +579,7 @@ function editCard (event) {
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("id", "submitButton");
     submitButton.setAttribute("form", "editToDoForm");
+    submitButton.classList.add("confirmBtn");
     submitButton.textContent = "Save Changes";
     submitButton.addEventListener("click", () => {
 
@@ -615,6 +622,7 @@ function editCard (event) {
     //cancelbutton
     let cancelButton = document.createElement("button");
     cancelButton.textContent = "Cancel";
+    cancelButton.classList.add("cancelBtn");
     cancelButton.addEventListener("click", () => {
         if (currentProject !== undefined) {
             displayTodosInProject();
