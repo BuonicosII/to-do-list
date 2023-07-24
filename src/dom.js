@@ -235,10 +235,13 @@ function createCard(todo) {
         toDoCard.appendChild(priorityDiv);
         if (todo.priority === 1) {
             priority.textContent = "High";
+            toDoCard.classList.add("high");
         } else if (todo.priority === 2) {
             priority.textContent = "Medium";
+            toDoCard.classList.add("medium");
         } else {
             priority.textContent = "Low";
+            toDoCard.classList.add("low");
         };
 
         let project = document.createElement("p");
