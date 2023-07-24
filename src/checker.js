@@ -11,31 +11,22 @@ let currentProject = undefined;
 
 //two examples of toDos to troubleshoot
 
-const ghost = new ToDo ("Ghost Walking", "A Lamb of God song", new Date(), 1, "Resolution");
+const lunch = new ToDo ("Have lunch", "Have a healthy lunch!", new Date(), 1, "Self care");
 
-const under = new ToDo ("The Undertow", "Another Lamb of God song", "2012-01-24", 2, "Resolution");
+const shower = new ToDo ("Take a shower", "Time to take a nice shower", "2012-01-24", 2, "Self care");
 
-const deuts = new ToDo ("Deutschland", "A Rammstein song", "2019-01-03", 3, "Rammstein");
+const plants = new ToDo ("Water the cactus", "Desert plants need water too, sometimes!", "2019-01-03", 3, "House stuff");
 
-const resolution = new Array 
-Object.defineProperty(resolution, 'id', {value: "Resolution"});
+const selfCare = new Array 
+Object.defineProperty(selfCare, 'id', {value: "Self care"});
 
-const rammstein = new Array
-Object.defineProperty(rammstein, 'id', {value: "Rammstein"});
+const houseStuff = new Array
+Object.defineProperty(houseStuff, 'id', {value: "House stuff"});
 
-allToDos.push(ghost, under, deuts);
-resolution.push(ghost, under);
-rammstein.push(deuts);
+allToDos.push(lunch, shower, plants);
+selfCare.push(lunch, shower);
+houseStuff.push(plants);
 
-allProjects.push(resolution, rammstein);
+allProjects.push(selfCare, houseStuff);
 
-//let getCurrentProject = () => {
-//    return currentProject
-//};
-
-//let setCurrentProject = function(value){
-//    currentProject = value;
-//    return currentProject;
-//}
-
-export { allToDos, allProjects, currentProject, resolution }
+export { allToDos, allProjects, currentProject }
