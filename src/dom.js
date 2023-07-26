@@ -1,4 +1,4 @@
-import { allToDos, allProjects, currentProject, resolution} from "./checker";
+import { allToDos, allProjects, currentProject } from "./checker";
 import { createToDo, createProject } from "./events";
 import { format } from "date-fns";
 

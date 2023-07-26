@@ -10,3 +10,4 @@ todayTaskButton.addEventListener("click", dueDateIsToday);
 weeklyTaskButton.addEventListener("click", dueDateIsThisWeek);
 
 displayAllProjects()
+allTasks()

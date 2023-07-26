@@ -1,5 +1,6 @@
 import { ToDo } from "./todo";
 import { allToDos, allProjects, currentProject } from "./checker";
+import { saveToLocalStorage } from "./localStorage";
 
 //function to create a todo from a form submit and push it to the alltodos array and a specific project array
 function createToDo(event) {
@@ -51,7 +52,7 @@ function createProject(event){
     }); 
 
     allProjects.push(newProject);
-    console.log(allProjects)
+
 }
 
 export {createToDo, createProject}
