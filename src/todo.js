@@ -29,4 +29,11 @@ class ToDo {
     }
 }
 
-export { ToDo }
+class Project {
+    constructor (id) {
+        this.id = id;
+        this.tasks = [];
+    }
+}
+
+export { ToDo, Project }

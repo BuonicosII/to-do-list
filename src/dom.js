@@ -309,6 +309,7 @@ function allTasks () {
 //function to display all projects
 
 function displayAllProjects() {
+    console.log(allProjects)
     let projectList = document.getElementById("projectList");
 
     while (projectList.hasChildNodes()) {

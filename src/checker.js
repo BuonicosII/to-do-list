@@ -1,4 +1,4 @@
-import { ToDo } from "./todo";
+import { ToDo, Project } from "./todo";
 import { addDays } from "date-fns";
 
 //an array where to store all the todos
@@ -18,16 +18,18 @@ const shower = new ToDo ("Take a shower", "Time to take a nice shower", addDays(
 
 const plants = new ToDo ("Water the cactus", "Desert plants need water too, sometimes!", addDays(new Date(), 3), 3, "House stuff");
 
-const selfCare = new Array 
-Object.defineProperty(selfCare, 'id', {value: "Self care"});
+const presents = new ToDo ("Buy presents", "Don't forget that birthday!", addDays(new Date(), 7), 1, "-" );
 
-const houseStuff = new Array
-Object.defineProperty(houseStuff, 'id', {value: "House stuff"});
+const noProject = new Project ("-");
 
-allToDos.push(lunch, shower, plants);
-selfCare.push(lunch, shower);
-houseStuff.push(plants);
+const selfCare = new Project ("Self care");
 
-allProjects.push(selfCare, houseStuff);
+const houseStuff = new Project ("House Stuff");
+
+noProject.tasks.push(presents);
+selfCare.tasks.push(lunch, shower);
+houseStuff.tasks.push(plants);
+
+allProjects.push(noProject, selfCare, houseStuff);
 
 export { allToDos, allProjects, currentProject }

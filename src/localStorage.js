@@ -7,6 +7,4 @@ function saveToLocalStorage () {
     localStorage.setItem("allToDos", JSON.stringify(allToDos));
 }
 
-//some commment
-
 export { saveToLocalStorage }
