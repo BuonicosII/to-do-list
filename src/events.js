@@ -32,12 +32,13 @@ function createToDo(event) {
     allToDos.push(newTask);
 
 //(1) this condition allows the toDo object to be pushed only in an existing project array
+/*
     if (allProjects.findIndex(object => { return object.id === `${project}`}) !== -1) {
         allProjects.find(object => {
             return object.id === `${project}`
           }).push(newTask);
     };
-
+*/
 }
 
 //function to create a project from a form submit and push it to the allProjects array
@@ -46,10 +47,7 @@ function createProject(event){
     let title = document.getElementById("projectTitle").value;
     title = title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
 
-    const newProject = new Array ();
-    Object.defineProperty(newProject, 'id', {
-        value: title
-    }); 
+    const newProject = title;
 
     allProjects.push(newProject);
 

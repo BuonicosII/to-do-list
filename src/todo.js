@@ -4,7 +4,7 @@ class ToDo {
         this.title = title;
         this.description = description;
         this.dueDate = new Date(dueDate);
-        this.priority = priority;
+        this.priority = Number(priority);
         this.project = project;
     }
 
@@ -29,11 +29,4 @@ class ToDo {
     }
 }
 
-class Project {
-    constructor (id) {
-        this.id = id;
-        this.tasks = [];
-    }
-}
-
-export { ToDo, Project }
+export { ToDo }

@@ -133,8 +133,8 @@ function createForm () {
     
         for (const item of allProjects) {
             let option = document.createElement("option");
-            option.setAttribute("value", `${item.id}`);
-            option.textContent = `${item.id}`;
+            option.setAttribute("value", `${item}`);
+            option.textContent = `${item}`;
             projectSelection.appendChild(option);
             }
         
@@ -309,7 +309,7 @@ function allTasks () {
 //function to display all projects
 
 function displayAllProjects() {
-    console.log(allProjects)
+
     let projectList = document.getElementById("projectList");
 
     while (projectList.hasChildNodes()) {
@@ -323,23 +323,25 @@ function displayAllProjects() {
     projectList.appendChild(addProjectBtn);
 
     for (const project of allProjects) {
-        let projectDiv = document.createElement ("div");
-        projectDiv.setAttribute("id", `${project.id}`);
-        projectDiv.setAttribute("class", "projectDiv");
 
-        let projectListing = document.createElement("p");
-        projectListing.textContent = project.id;
-        projectListing.setAttribute("class", "interactable");
-        projectListing.addEventListener("click", displayTodosInProjectShoulder);
+            let projectDiv = document.createElement ("div");
+            projectDiv.setAttribute("id", `${project}`);
+            projectDiv.setAttribute("class", "projectDiv");
 
-        let cancelProjectBtn = document.createElement("p");
-        cancelProjectBtn.textContent = "✕";
-        cancelProjectBtn.classList.add("cancelX");
-        cancelProjectBtn.addEventListener("click", eraseProject);
+            let projectListing = document.createElement("p");
+            projectListing.textContent = `${project}`;
+            projectListing.setAttribute("class", "interactable");
+            projectListing.addEventListener("click", displayTodosInProjectShoulder);
 
-        projectList.appendChild(projectDiv);
-        projectDiv.appendChild(projectListing);
-        projectDiv.appendChild(cancelProjectBtn);
+            let cancelProjectBtn = document.createElement("p");
+            cancelProjectBtn.textContent = "✕";
+            cancelProjectBtn.classList.add("cancelX");
+            cancelProjectBtn.addEventListener("click", eraseProject);
+
+            projectList.appendChild(projectDiv);
+            projectDiv.appendChild(projectListing);
+            projectDiv.appendChild(cancelProjectBtn);
+        
     }
 
 }
@@ -366,10 +368,7 @@ function displayTodosInProject() {
     mainBody.appendChild(addTaskBtn);
 
 
-
-    let thisProject = allProjects.find(({ id }) => id === currentProject);
-
-    thisProject.sort(function(a, b) {
+    allToDos.sort(function(a, b) {
         let dueDateA = new Date(a.dueDate);
         let dueDAteB = new Date(b.dueDate);
 
@@ -378,8 +377,10 @@ function displayTodosInProject() {
         return 0;
     });
 
-    for (const todo of thisProject) {
-        createCard(todo);
+    for (const todo of allToDos) {
+        if (todo.project === currentProject) {
+            createCard(todo);
+        }
     }
 }
 
@@ -420,12 +421,12 @@ function dueDateIsThisWeek() {
 function eraseToDo (event) {
     let toDoId = event.target.parentNode.parentNode.id;
     let toDotoRemove = allToDos.find(({ title }) => title === toDoId);
-
+    /*
     //remove toDo from a certain project
     let removeFromTodoProject = allProjects.find(({ id }) => id === toDotoRemove.project);
     let currentProjectIndex = removeFromTodoProject.findIndex(({ title }) => title === toDotoRemove.title);
     removeFromTodoProject.splice(`${currentProjectIndex}`, 1);
-
+    */
     //remove toDo from allToDos array
     let generalIndex = allToDos.findIndex(({ title }) => title === toDotoRemove.title);
     allToDos.splice(`${generalIndex}`, 1);
@@ -442,7 +443,7 @@ function eraseProject (event) {
     if (allToDos.findIndex(({ project }) => project === projectToBeErased) !== -1) {
         alert("You can't cancel an unempty project. Make sure the project is empty first!")
     } else {
-        let projectIndex = allProjects.findIndex(( { id } ) => id === projectToBeErased);
+        let projectIndex = allProjects.findIndex(( id ) => id === projectToBeErased);
         allProjects.splice(`${projectIndex}`, 1);
     }
 
@@ -562,10 +563,10 @@ function editCard (event) {
     
     for (const item of allProjects) {
         let option = document.createElement("option");
-        option.setAttribute("value", `${item.id}`);
-        option.textContent = `${item.id}`;
+        option.setAttribute("value", `${item}`);
+        option.textContent = `${item}`;
         projectSelection.appendChild(option);
-        if (item.id === thisToDo.project) {
+        if (item === thisToDo.project) {
             option.setAttribute("selected", "selected");
         }
         }
@@ -587,13 +588,13 @@ function editCard (event) {
         event.preventDefault();
 
         //1 - remove the old todo from the old corresponding project array
-
+        /*
         let oldTodoProject = allProjects.find(({ id }) => id === thisToDo.project);
         let oldIndex = oldTodoProject.findIndex(({ title }) => title === thisToDo.title);
         oldTodoProject.splice(`${oldIndex}`, 1);
-
+        */
         
-        //2 - edit the toDo into the AllTasks array 
+        //2 - edit the toDo into the AllToDos array 
         thisToDo.setTitle = title.value;
         thisToDo.setDescription = description.value;
         thisToDo.setDueDate = dueDate.value;
@@ -602,14 +603,14 @@ function editCard (event) {
         console.log(typeof thisToDo.priority);
         
         //3 - copy the edited toDo in the corresponding project array 
-    
+        /*
         if (allProjects.findIndex(object => { return object.id === `${thisToDo.project}`}) !== -1) {
             let newTodoProject = allProjects.find(object => { return object.id === `${thisToDo.project}`
               })
                             
               newTodoProject.push(thisToDo);
         };
-      
+        */
         //4 - call either all tasks or display toDos in project
         
         if (currentProject !== undefined) {

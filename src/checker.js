@@ -1,4 +1,4 @@
-import { ToDo, Project } from "./todo";
+import { ToDo } from "./todo";
 import { addDays } from "date-fns";
 
 //an array where to store all the todos
@@ -12,24 +12,21 @@ let currentProject = undefined;
 
 //two examples of toDos to troubleshoot
 
-const lunch = new ToDo ("Have lunch", "Have a healthy lunch!", new Date(), 1, "Self care");
+const lunch = new ToDo ("Have lunch", "Have a healthy lunch!", new Date(), 1, "Self Care");
 
-const shower = new ToDo ("Take a shower", "Time to take a nice shower", addDays(new Date(), 1), 2, "Self care");
+const shower = new ToDo ("Take a shower", "Time to take a nice shower", addDays(new Date(), 1), 2, "Self Care");
 
-const plants = new ToDo ("Water the cactus", "Desert plants need water too, sometimes!", addDays(new Date(), 3), 3, "House stuff");
+const plants = new ToDo ("Water the cactus", "Desert plants need water too, sometimes!", addDays(new Date(), 3), 3, "House Stuff");
 
-const presents = new ToDo ("Buy presents", "Don't forget that birthday!", addDays(new Date(), 7), 1, "-" );
+const presents = new ToDo ("Buy presents", "Don't forget that birthday!", addDays(new Date(), 7), 1, "" );
 
-const noProject = new Project ("-");
 
-const selfCare = new Project ("Self care");
+const selfCare = "Self Care";
 
-const houseStuff = new Project ("House Stuff");
+const houseStuff = "House Stuff";
 
-noProject.tasks.push(presents);
-selfCare.tasks.push(lunch, shower);
-houseStuff.tasks.push(plants);
+allToDos.push(presents, lunch, shower, plants);
 
-allProjects.push(noProject, selfCare, houseStuff);
+allProjects.push(selfCare, houseStuff);
 
 export { allToDos, allProjects, currentProject }
