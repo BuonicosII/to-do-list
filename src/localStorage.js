@@ -21,8 +21,6 @@ function retrieveToDos () {
         const ToDoObject = new ToDo (instance.title, instance.description, `${parseISO(instance.dueDate)}`, instance.priority, instance.project);
         allToDos.splice(allToDos.findIndex(({ title }) => title === instance.title), 1, ToDoObject);
     }
-
-    console.log(allToDos)
 }
 
 export { saveToLocalStorage, retrieveProjects, retrieveToDos}

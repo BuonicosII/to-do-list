@@ -1,8 +1,7 @@
 import { allToDos, allProjects, currentProject } from "./checker";
-import { createToDo, createProject } from "./events";
-import { format, parseISO } from "date-fns";
+import { createToDo, createProject, editToDo, eraseProject, eraseToDo } from "./events";
+import { format } from "date-fns";
 import { retrieveProjects, retrieveToDos, saveToLocalStorage } from "./localStorage";
-import { ToDo } from "./todo";
 
 //function to create a form that allows users to create a new ToDo
 
@@ -266,7 +265,15 @@ function createCard(todo) {
         let eraseToDoBtn = document.createElement("button");
         eraseToDoBtn.textContent = "Erase";
         eraseToDoBtn.classList.add("eraseBtn");
-        eraseToDoBtn.addEventListener("click", eraseToDo);
+        eraseToDoBtn.addEventListener("click", (event)=> {
+            eraseToDo(event.target.parentNode.parentNode.id)
+            
+            if (currentProject !== undefined) {
+                displayTodosInProject();
+            } else {
+                allTasks();
+            }
+        });
 
         let buttonsDiv = document.createElement("div");
         buttonsDiv.setAttribute("class", "buttonDiv");
@@ -342,7 +349,12 @@ function displayAllProjects() {
             let cancelProjectBtn = document.createElement("p");
             cancelProjectBtn.textContent = "✕";
             cancelProjectBtn.classList.add("cancelX");
-            cancelProjectBtn.addEventListener("click", eraseProject);
+            cancelProjectBtn.addEventListener("click", (event) => {
+                
+                eraseProject(event.target.parentNode.id);
+
+                displayAllProjects();
+            });
 
             projectList.appendChild(projectDiv);
             projectDiv.appendChild(projectListing);
@@ -425,52 +437,6 @@ function dueDateIsThisWeek() {
             createCard(todo);
         }
     }
-}
-
-//function to erase the toDo
-
-function eraseToDo (event) {
-    let toDoId = event.target.parentNode.parentNode.id;
-    
-    retrieveToDos();
-
-    let toDotoRemove = allToDos.find(({ title }) => title === toDoId);
-    /*
-    //remove toDo from a certain project
-    let removeFromTodoProject = allProjects.find(({ id }) => id === toDotoRemove.project);
-    let currentProjectIndex = removeFromTodoProject.findIndex(({ title }) => title === toDotoRemove.title);
-    removeFromTodoProject.splice(`${currentProjectIndex}`, 1);
-    */
-    //remove toDo from allToDos array
-    let generalIndex = allToDos.findIndex(({ title }) => title === toDotoRemove.title);
-    allToDos.splice(`${generalIndex}`, 1);
-
-    saveToLocalStorage();
-
-    if (currentProject !== undefined) {
-        displayTodosInProject();
-    } else {
-        allTasks();
-    }
-}
-
-function eraseProject (event) {
-    let projectToBeErased = event.target.parentNode.id;
-
-    retrieveToDos();
-
-    retrieveProjects();
-
-    if (allToDos.findIndex(({ project }) => project === projectToBeErased) !== -1) {
-        alert("You can't cancel an unempty project. Make sure the project is empty first!")
-    } else {
-        let projectIndex = allProjects.findIndex(( id ) => id === projectToBeErased);
-        allProjects.splice(`${projectIndex}`, 1);
-    }
-
-    saveToLocalStorage();
-    
-    displayAllProjects();
 }
 
 //function to edit the toDo in the cards
@@ -608,36 +574,9 @@ function editCard (event) {
     submitButton.setAttribute("form", "editToDoForm");
     submitButton.classList.add("confirmBtn");
     submitButton.textContent = "Save Changes";
-    submitButton.addEventListener("click", () => {
+    submitButton.addEventListener("click", (event) => {
 
-        event.preventDefault();
-
-        //1 - remove the old todo from the old corresponding project array
-        /*
-        let oldTodoProject = allProjects.find(({ id }) => id === thisToDo.project);
-        let oldIndex = oldTodoProject.findIndex(({ title }) => title === thisToDo.title);
-        oldTodoProject.splice(`${oldIndex}`, 1);
-        */
-        
-        //2 - edit the toDo into the AllToDos array 
-        thisToDo.setTitle = title.value;
-        thisToDo.setDescription = description.value;
-        thisToDo.setDueDate = dueDate.value;
-        thisToDo.setPriority = priority.value;
-        thisToDo.setProject = projectSelection.value;
-        
-        //3 - copy the edited toDo in the corresponding project array 
-        /*
-        if (allProjects.findIndex(object => { return object.id === `${thisToDo.project}`}) !== -1) {
-            let newTodoProject = allProjects.find(object => { return object.id === `${thisToDo.project}`
-              })
-                            
-              newTodoProject.push(thisToDo);
-        };
-        */
-        //4 - call either all tasks or display toDos in project
-
-        saveToLocalStorage();
+        editToDo(event, thisToDo)
         
         if (currentProject !== undefined) {
             displayTodosInProject();

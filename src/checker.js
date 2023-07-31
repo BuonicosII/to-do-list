@@ -19,7 +19,7 @@ const shower = new ToDo ("Take a shower", "Time to take a nice shower", addDays(
 
 const plants = new ToDo ("Water the cactus", "Desert plants need water too, sometimes!", addDays(new Date(), 3), 3, "House Stuff");
 
-const presents = new ToDo ("Buy presents", "Don't forget that birthday!", addDays(new Date(), 7), 1, "" );
+const presents = new ToDo ("Buy presents", "Don't forget that birthday!", addDays(new Date(), 7), 1, "-" );
 
 const selfCare = "Self Care";
 
