@@ -31,6 +31,9 @@ function createToDo(event) {
 //add the newly created toDo into an array containing all the toDo created
     allToDos.push(newTask);
 
+    console.log(Object.getPrototypeOf(newTask))
+    saveToLocalStorage();
+
 //(1) this condition allows the toDo object to be pushed only in an existing project array
 /*
     if (allProjects.findIndex(object => { return object.id === `${project}`}) !== -1) {
@@ -50,6 +53,7 @@ function createProject(event){
     const newProject = title;
 
     allProjects.push(newProject);
+    saveToLocalStorage();
 
 }
 

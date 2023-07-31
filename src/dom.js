@@ -1,6 +1,8 @@
 import { allToDos, allProjects, currentProject } from "./checker";
 import { createToDo, createProject } from "./events";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
+import { retrieveProjects, retrieveToDos, saveToLocalStorage } from "./localStorage";
+import { ToDo } from "./todo";
 
 //function to create a form that allows users to create a new ToDo
 
@@ -292,6 +294,8 @@ function allTasks () {
     addTaskBtn.addEventListener("click", createForm);
     mainBody.appendChild(addTaskBtn);
 
+    retrieveToDos();
+
     allToDos.sort(function(a, b) {
         let dueDateA = new Date(a.dueDate);
         let dueDAteB = new Date(b.dueDate);
@@ -321,6 +325,8 @@ function displayAllProjects() {
     addProjectBtn.addEventListener("click", createProjectForm);
     addProjectBtn.classList.add("editBtn")
     projectList.appendChild(addProjectBtn);
+
+    retrieveProjects();
 
     for (const project of allProjects) {
 
@@ -367,6 +373,7 @@ function displayTodosInProject() {
     addTaskBtn.addEventListener("click", createForm);
     mainBody.appendChild(addTaskBtn);
 
+    retrieveToDos();
 
     allToDos.sort(function(a, b) {
         let dueDateA = new Date(a.dueDate);
@@ -393,6 +400,8 @@ function dueDateIsToday() {
         mainBody.removeChild(mainBody.firstChild);
     };
 
+    retrieveToDos();
+
     for (const todo of allToDos) {
         if (format(todo.dueDate, "d MMMM yyyy") === format(new Date(), "d MMMM yyyy")) {
             createCard(todo);
@@ -409,6 +418,8 @@ function dueDateIsThisWeek() {
         mainBody.removeChild(mainBody.firstChild);
     };
 
+    retrieveToDos();
+
     for (const todo of allToDos) {
         if (format(todo.dueDate, "w yyyy") === format(new Date(), "w yyyy")) {
             createCard(todo);
@@ -420,6 +431,9 @@ function dueDateIsThisWeek() {
 
 function eraseToDo (event) {
     let toDoId = event.target.parentNode.parentNode.id;
+    
+    retrieveToDos();
+
     let toDotoRemove = allToDos.find(({ title }) => title === toDoId);
     /*
     //remove toDo from a certain project
@@ -431,6 +445,8 @@ function eraseToDo (event) {
     let generalIndex = allToDos.findIndex(({ title }) => title === toDotoRemove.title);
     allToDos.splice(`${generalIndex}`, 1);
 
+    saveToLocalStorage();
+
     if (currentProject !== undefined) {
         displayTodosInProject();
     } else {
@@ -440,6 +456,11 @@ function eraseToDo (event) {
 
 function eraseProject (event) {
     let projectToBeErased = event.target.parentNode.id;
+
+    retrieveToDos();
+
+    retrieveProjects();
+
     if (allToDos.findIndex(({ project }) => project === projectToBeErased) !== -1) {
         alert("You can't cancel an unempty project. Make sure the project is empty first!")
     } else {
@@ -447,6 +468,8 @@ function eraseProject (event) {
         allProjects.splice(`${projectIndex}`, 1);
     }
 
+    saveToLocalStorage();
+    
     displayAllProjects();
 }
 
@@ -459,6 +482,8 @@ function editCard (event) {
 
     //remove create Event Listener to prevent user from editing a todo and create a new one at the same time
     mainBody.firstChild.removeEventListener("click", createForm);
+
+    retrieveToDos();
 
     //retrieve toDoInfos from the allToDoS array
     let thisToDo = allToDos.find(({ title }) => title === toDoId);
@@ -600,7 +625,6 @@ function editCard (event) {
         thisToDo.setDueDate = dueDate.value;
         thisToDo.setPriority = priority.value;
         thisToDo.setProject = projectSelection.value;
-        console.log(typeof thisToDo.priority);
         
         //3 - copy the edited toDo in the corresponding project array 
         /*
@@ -612,6 +636,8 @@ function editCard (event) {
         };
         */
         //4 - call either all tasks or display toDos in project
+
+        saveToLocalStorage();
         
         if (currentProject !== undefined) {
             displayTodosInProject();
