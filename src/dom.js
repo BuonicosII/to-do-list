@@ -1,4 +1,4 @@
-import { allToDos, allProjects, currentProject } from "./checker";
+import { allToDos, allProjects, page } from "./checker";
 import { createToDo, createProject, editToDo, eraseProject, eraseToDo } from "./events";
 import { format } from "date-fns";
 import { retrieveProjects, retrieveToDos, saveToLocalStorage } from "./localStorage";
@@ -89,10 +89,14 @@ function createForm () {
     submitButton.textContent = "Add";
     submitButton.addEventListener("click", createToDo);
     submitButton.addEventListener("click", () => {
-        if (currentProject !== undefined) {
-            displayTodosInProject();
+        if (page === "allTasks") {
+            allTasks(); 
+        } else if (page === "today") {
+            dueDateIsToday();
+        } else if (page === "this week") {
+            dueDateIsThisWeek()
         } else {
-            allTasks();
+            displayTodosInProject();
         }
     });
 
@@ -100,10 +104,14 @@ function createForm () {
     let cancelButton = document.createElement("button");
     cancelButton.textContent = "Cancel";
     cancelButton.addEventListener("click", () => {
-        if (currentProject !== undefined) {
-            displayTodosInProject();
+        if (page === "allTasks") {
+            allTasks(); 
+        } else if (page === "today") {
+            dueDateIsToday();
+        } else if (page === "this week") {
+            dueDateIsThisWeek()
         } else {
-            allTasks();
+            displayTodosInProject();
         }
     });
 
@@ -121,7 +129,7 @@ function createForm () {
     //project input field
     //checks whether the user is on a project page and then 
 
-    if (currentProject === undefined) {
+    if (page === "allTasks") {
         let projectSelection = document.createElement("select");
         projectSelection.setAttribute("id", "projectSelection");
         let projectSelectionLabel = document.createElement("label");
@@ -268,10 +276,14 @@ function createCard(todo) {
         eraseToDoBtn.addEventListener("click", (event)=> {
             eraseToDo(event.target.parentNode.parentNode.id)
             
-            if (currentProject !== undefined) {
-                displayTodosInProject();
+            if (page === "allTasks") {
+                allTasks(); 
+            } else if (page === "today") {
+                dueDateIsToday();
+            } else if (page === "this week") {
+                dueDateIsThisWeek()
             } else {
-                allTasks();
+                displayTodosInProject();
             }
         });
 
@@ -287,7 +299,7 @@ function createCard(todo) {
 //function to display all tasks and a button to add a new one
 
 function allTasks () {
-    currentProject = undefined;
+    page = "allTasks";
 
     while (mainBody.hasChildNodes()) {
         mainBody.removeChild(mainBody.firstChild);
@@ -365,7 +377,7 @@ function displayAllProjects() {
 }
 
 function displayTodosInProjectShoulder(event) {
-    currentProject = event.target.textContent;
+    page = event.target.textContent;
     displayTodosInProject();
 }
 
@@ -397,7 +409,7 @@ function displayTodosInProject() {
     });
 
     for (const todo of allToDos) {
-        if (todo.project === currentProject) {
+        if (todo.project === page) {
             createCard(todo);
         }
     }
@@ -406,7 +418,7 @@ function displayTodosInProject() {
 //function to display all toDos whose due date is today
 
 function dueDateIsToday() {
-    currentProject = undefined;
+    page = "today";
 
     while (mainBody.hasChildNodes()) {
         mainBody.removeChild(mainBody.firstChild);
@@ -424,7 +436,7 @@ function dueDateIsToday() {
 //function to display all toDos whose due date is in the current week
 
 function dueDateIsThisWeek() {
-    currentProject = undefined;
+    page = "this week";
 
     while (mainBody.hasChildNodes()) {
         mainBody.removeChild(mainBody.firstChild);
@@ -578,10 +590,14 @@ function editCard (event) {
 
         editToDo(event, thisToDo)
         
-        if (currentProject !== undefined) {
-            displayTodosInProject();
+        if (page === "allTasks") {
+            allTasks(); 
+        } else if (page === "today") {
+            dueDateIsToday();
+        } else if (page === "this week") {
+            dueDateIsThisWeek()
         } else {
-            allTasks();
+            displayTodosInProject();
         }
         
     });
@@ -591,11 +607,17 @@ function editCard (event) {
     cancelButton.textContent = "Cancel";
     cancelButton.classList.add("cancelBtn");
     cancelButton.addEventListener("click", () => {
-        if (currentProject !== undefined) {
-            displayTodosInProject();
+ 
+        if (page === "allTasks") {
+            allTasks(); 
+        } else if (page === "today") {
+            dueDateIsToday();
+        } else if (page === "this week") {
+            dueDateIsThisWeek()
         } else {
-            allTasks();
+            displayTodosInProject();
         }
+
     });
 
     let buttonsDiv = document.createElement("div");

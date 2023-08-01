@@ -9,7 +9,7 @@ let allToDos = []
 let allProjects = []
 
 //a variable to track which project is currently selected
-let currentProject = undefined;
+let page = undefined;
 
 //two examples of toDos to troubleshoot
 
@@ -30,4 +30,4 @@ allProjects.push(selfCare, houseStuff);
 
 saveToLocalStorage()
 
-export { allToDos, allProjects, currentProject }
+export { allToDos, allProjects, page }

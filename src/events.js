@@ -1,5 +1,5 @@
 import { ToDo } from "./todo";
-import { allToDos, allProjects, currentProject } from "./checker";
+import { allToDos, allProjects, page } from "./checker";
 import { saveToLocalStorage, retrieveProjects, retrieveToDos } from "./localStorage";
 
 //function to create a todo from a form submit and push it to the alltodos array and a specific project array
@@ -18,12 +18,13 @@ function createToDo(event) {
 //push the todo in a non existing array
 
 //in the second case the computer recognizes the user is in a project page and retrieves the project name from the
-//getCurrentProject variable which is updated whenever a project is selected or created 
+//getpage variable which is updated whenever a project is selected or created 
 
-    if (currentProject === undefined){
+
+    if (page === "allTasks"){
         project = document.getElementById("projectSelection").value
     } else {
-        project = currentProject;
+        project = page;
     }
         
     const newTask = new ToDo (title, description, dueDate, priority, project);
@@ -95,8 +96,8 @@ function eraseToDo (toDoId) {
     /*
     //remove toDo from a certain project
     let removeFromTodoProject = allProjects.find(({ id }) => id === toDotoRemove.project);
-    let currentProjectIndex = removeFromTodoProject.findIndex(({ title }) => title === toDotoRemove.title);
-    removeFromTodoProject.splice(`${currentProjectIndex}`, 1);
+    let pageIndex = removeFromTodoProject.findIndex(({ title }) => title === toDotoRemove.title);
+    removeFromTodoProject.splice(`${pageIndex}`, 1);
     */
     //remove toDo from allToDos array
     let generalIndex = allToDos.findIndex(({ title }) => title === toDotoRemove.title);
