@@ -343,3 +343,8 @@ select {
     transition: color 650ms linear;
     color: rgb(196, 31, 31);
 }
+
+.checkbox {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}

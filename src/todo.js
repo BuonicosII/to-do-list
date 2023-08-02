@@ -6,6 +6,7 @@ class ToDo {
         this.dueDate = new Date(dueDate);
         this.priority = Number(priority);
         this.project = project;
+        this.doneStatus = false;
     }
 
     set setTitle(value) {
@@ -27,6 +28,11 @@ class ToDo {
     set setProject(value) {
         this.project = value;
     }
+
+    set setDoneStatus(value) {
+        this.doneStatus = value;
+        }
+    
 }
 
 export { ToDo }

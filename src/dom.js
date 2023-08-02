@@ -216,6 +216,13 @@ function createCard(todo) {
         titleDiv.appendChild(title);
         toDoCard.appendChild(titleDiv);
 
+        let status = document.createElement("input");
+        status.setAttribute("type", "checkbox");
+        status.setAttribute("id", "status");
+        status.setAttribute("name", "status");
+        status.setAttribute("class", "checkbox");
+        toDoCard.appendChild(status);
+
         let description = document.createElement("p");
         description.textContent = todo.description;
         let descriptionLabel = document.createElement("label");
