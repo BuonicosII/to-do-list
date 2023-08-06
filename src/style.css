@@ -366,3 +366,8 @@ select {
 .checkbox:checked:before {
     visibility: visible;
   }
+
+.cardDone {
+    color: grey;
+    box-shadow: inset -4px 0 rgba(128, 128, 128, 0.65), 5px 5px 10px grey;
+}

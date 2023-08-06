@@ -85,52 +85,7 @@ function createForm () {
     priorityDiv.appendChild(priorityLabel);
     priorityDiv.appendChild(priority);
 
-    //submitbutton
-    let submitButton = document.createElement("button");
-    submitButton.setAttribute("type", "submit");
-    submitButton.setAttribute("id", "submitButton");
-    submitButton.setAttribute("form", "toDoForm");
-    submitButton.textContent = "Add";
-    submitButton.addEventListener("click", createToDo);
-    submitButton.addEventListener("click", () => {
-        if (page === "allTasks") {
-            allTasks(); 
-        } else if (page === "today") {
-            dueDateIsToday();
-        } else if (page === "this week") {
-            dueDateIsThisWeek()
-        } else {
-            displayTodosInProject();
-        }
-    });
-
-    //cancelbutton
-    let cancelButton = document.createElement("button");
-    cancelButton.textContent = "Cancel";
-    cancelButton.addEventListener("click", () => {
-        if (page === "allTasks") {
-            allTasks(); 
-        } else if (page === "today") {
-            dueDateIsToday();
-        } else if (page === "this week") {
-            dueDateIsThisWeek()
-        } else {
-            displayTodosInProject();
-        }
-    });
-
-    let buttonsDiv = document.createElement("div");
-    buttonsDiv.setAttribute("class", "buttonDiv");
-    buttonsDiv.appendChild(submitButton);
-    buttonsDiv.appendChild(cancelButton);
-
-    mainBody.prepend(form);
-    form.appendChild(titleDiv);
-    form.appendChild(descriptionDiv);
-    form.appendChild(dueDateDiv);
-    form.appendChild(priorityDiv);
-    form.appendChild(status);
-    
+        
     //project input field
     //checks whether the user is on a project page and then 
 
@@ -157,7 +112,70 @@ function createForm () {
         projectSelectionDiv.appendChild(projectSelection);
         projectSelectionDiv.setAttribute("class", "projectSelectionDiv");
         form.appendChild(projectSelectionDiv);
+
     }
+
+    //submitbutton
+    let submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("id", "submitButton");
+    submitButton.setAttribute("form", "toDoForm");
+    submitButton.textContent = "Add";
+    submitButton.addEventListener("click", (event) => {
+
+        let projectArg
+
+        if (page === "allTasks") {
+            projectArg = projectSelection.value
+        } else {
+            projectArg = page
+        }
+
+        createToDo(event, title.value, description.value, dueDate.value, priority.value, projectArg, status.checked)
+
+        if (page === "allTasks") {
+            allTasks(); 
+        } else if (page === "today") {
+            dueDateIsToday();
+        } else if (page === "this week") {
+            dueDateIsThisWeek()
+        } else if (page === "done tasks") {
+            displayDoneTasks();
+        } else {
+            displayTodosInProject();
+        }
+        
+    });
+
+    //cancelbutton
+    let cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.addEventListener("click", () => {
+        if (page === "allTasks") {
+            allTasks(); 
+        } else if (page === "today") {
+            dueDateIsToday();
+        } else if (page === "this week") {
+            dueDateIsThisWeek()
+        } else if (page === "done tasks") {
+            displayDoneTasks();
+        } else {
+            displayTodosInProject();
+        }
+        
+    });
+
+    let buttonsDiv = document.createElement("div");
+    buttonsDiv.setAttribute("class", "buttonDiv");
+    buttonsDiv.appendChild(submitButton);
+    buttonsDiv.appendChild(cancelButton);
+
+    mainBody.prepend(form);
+    form.appendChild(titleDiv);
+    form.appendChild(descriptionDiv);
+    form.appendChild(dueDateDiv);
+    form.appendChild(priorityDiv);
+    form.appendChild(status);
     form.appendChild(buttonsDiv);
 }
 
@@ -187,8 +205,10 @@ function createProjectForm () {
     submitButton.setAttribute("form", "projectForm");
     submitButton.textContent = "Add";
     submitButton.classList.add("confirmBtn");
-    submitButton.addEventListener("click", createProject);
-    submitButton.addEventListener("click", displayAllProjects);
+    submitButton.addEventListener("click", (event) => {
+        createProject(event, projectName.value);
+        displayAllProjects();
+    });
     
     //cancelButton
     let cancelButton = document.createElement("button");
@@ -228,7 +248,8 @@ function createCard(todo) {
         status.setAttribute("class", "checkbox");
         toDoCard.appendChild(status);
         if (todo.doneStatus === true) {
-            status.checked = true; 
+            status.checked = true;
+            toDoCard.classList.add("cardDone")
         };
         status.addEventListener("click", clickToggle);
 
@@ -298,9 +319,12 @@ function createCard(todo) {
                 dueDateIsToday();
             } else if (page === "this week") {
                 dueDateIsThisWeek()
+            } else if (page === "done tasks") {
+                displayDoneTasks();
             } else {
                 displayTodosInProject();
             }
+            
         });
 
         let buttonsDiv = document.createElement("div");
@@ -467,6 +491,22 @@ function dueDateIsThisWeek() {
     }
 }
 
+function displayDoneTasks() {
+    page = "done tasks";
+
+    while (mainBody.hasChildNodes()) {
+        mainBody.removeChild(mainBody.firstChild);
+    };
+
+    retrieveToDos();
+
+    for (const todo of allToDos) {
+        if (todo.doneStatus === true) {
+            createCard(todo);
+        }
+    }
+}
+
 //function to toggle done status
 
 function clickToggle (event) {
@@ -476,8 +516,10 @@ function clickToggle (event) {
     
     if (event.target.checked) {
         thisToDo.setDoneStatus = true;
+        event.target.parentNode.classList.add("cardDone");
     } else {
         thisToDo.setDoneStatus = false;
+        event.target.parentNode.classList.remove("cardDone");
     }
 
     saveToLocalStorage();
@@ -638,6 +680,8 @@ function editCard (event) {
             dueDateIsToday();
         } else if (page === "this week") {
             dueDateIsThisWeek()
+        } else if (page === "done tasks") {
+            displayDoneTasks();
         } else {
             displayTodosInProject();
         }
@@ -656,10 +700,12 @@ function editCard (event) {
             dueDateIsToday();
         } else if (page === "this week") {
             dueDateIsThisWeek()
+        } else if (page === "done tasks") {
+            displayDoneTasks();
         } else {
             displayTodosInProject();
         }
-
+        
     });
 
     let buttonsDiv = document.createElement("div");
@@ -684,4 +730,4 @@ function editCard (event) {
 }
 
 
-export { createForm, createProjectForm, allTasks, displayAllProjects, dueDateIsToday, dueDateIsThisWeek }
+export { createForm, createProjectForm, allTasks, displayAllProjects, dueDateIsToday, dueDateIsThisWeek, displayDoneTasks }
