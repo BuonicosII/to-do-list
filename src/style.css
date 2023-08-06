@@ -345,6 +345,24 @@ select {
 }
 
 .checkbox {
+    appearance: none;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+    height: 2vh;
+    width: 2vh;
+    justify-self: right;
 }
+
+.checkbox:before {
+    content: "✔";
+    color: black;
+    position: relative;
+    right: 5px;
+    bottom: 10px;
+    visibility: hidden;
+    font-size: 1.1vw;
+}
+
+.checkbox:checked:before {
+    visibility: visible;
+  }

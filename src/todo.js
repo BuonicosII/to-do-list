@@ -1,12 +1,12 @@
 //class to create the toDoObjects with their properties
 class ToDo {
-    constructor (title, description, dueDate, priority, project) {
+    constructor (title, description, dueDate, priority, project, status) {
         this.title = title;
         this.description = description;
         this.dueDate = new Date(dueDate);
         this.priority = Number(priority);
         this.project = project;
-        this.doneStatus = false;
+        this.doneStatus = status;
     }
 
     set setTitle(value) {

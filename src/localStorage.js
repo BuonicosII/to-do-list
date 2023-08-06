@@ -19,6 +19,13 @@ function retrieveToDos () {
 
     for (const instance of allToDos) {
         const ToDoObject = new ToDo (instance.title, instance.description, `${parseISO(instance.dueDate)}`, instance.priority, instance.project);
+
+        if (instance.doneStatus === true) {
+            ToDoObject.setDoneStatus = true
+        } else if (instance.doneStatus === false) {
+            ToDoObject.setDoneStatus = false
+        }
+
         allToDos.splice(allToDos.findIndex(({ title }) => title === instance.title), 1, ToDoObject);
     }
 }

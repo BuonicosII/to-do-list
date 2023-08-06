@@ -26,13 +26,14 @@ function createToDo(event) {
     } else {
         project = page;
     }
+
+    let status = document.getElementById("status").checked;
         
-    const newTask = new ToDo (title, description, dueDate, priority, project);
+    const newTask = new ToDo (title, description, dueDate, priority, project, status);
 
 //add the newly created toDo into an array containing all the toDo created
     allToDos.push(newTask);
 
-    console.log(Object.getPrototypeOf(newTask))
     saveToLocalStorage();
 
 //(1) this condition allows the toDo object to be pushed only in an existing project array
@@ -58,7 +59,7 @@ function createProject(event){
 
 }
 
-function editToDo(event, thisToDo) {
+function editToDo(event, thisToDo, title, description, dueDate, priority, projectSelection, status) {
     event.preventDefault();
 
     thisToDo.setTitle = title.value;
@@ -66,6 +67,7 @@ function editToDo(event, thisToDo) {
     thisToDo.setDueDate = dueDate.value;
     thisToDo.setPriority = priority.value;
     thisToDo.setProject = projectSelection.value;
+    thisToDo.setDoneStatus = status.checked
 
     saveToLocalStorage();
 }

@@ -8,9 +8,7 @@ import { retrieveProjects, retrieveToDos, saveToLocalStorage } from "./localStor
 function createForm () {
     let mainBody = document.getElementById("mainBody");
 
-    //hile (mainBody.hasChildNodes()) {
         mainBody.removeChild(mainBody.firstChild);
-    //};
 
     let form = document.createElement("form");
     form.setAttribute("action", "");
@@ -29,6 +27,12 @@ function createForm () {
     titleDiv.setAttribute("class", "titleDiv");
     titleDiv.appendChild(titleLabel);
     titleDiv.appendChild(title);
+
+    let status = document.createElement("input");
+    status.setAttribute("type", "checkbox");
+    status.setAttribute("id", "status");
+    status.setAttribute("name", "status");
+    status.setAttribute("class", "checkbox");
 
     //description input field
     let description = document.createElement("input");
@@ -125,6 +129,7 @@ function createForm () {
     form.appendChild(descriptionDiv);
     form.appendChild(dueDateDiv);
     form.appendChild(priorityDiv);
+    form.appendChild(status);
     
     //project input field
     //checks whether the user is on a project page and then 
@@ -204,7 +209,7 @@ function createCard(todo) {
         let mainBody = document.getElementById("mainBody");
         let toDoCard = document.createElement("div");
         toDoCard.setAttribute("class", "card");
-        toDoCard.setAttribute("id", `${todo.title}`)
+        toDoCard.setAttribute("id", `${todo.title}`);
 
         let title = document.createElement("p");
         title.textContent = todo.title;
@@ -222,6 +227,10 @@ function createCard(todo) {
         status.setAttribute("name", "status");
         status.setAttribute("class", "checkbox");
         toDoCard.appendChild(status);
+        if (todo.doneStatus === true) {
+            status.checked = true; 
+        };
+        status.addEventListener("click", clickToggle);
 
         let description = document.createElement("p");
         description.textContent = todo.description;
@@ -458,6 +467,22 @@ function dueDateIsThisWeek() {
     }
 }
 
+//function to toggle done status
+
+function clickToggle (event) {
+    let toDoId = event.target.parentNode.id;
+
+    let thisToDo = allToDos.find(({ title }) => title === toDoId);
+    
+    if (event.target.checked) {
+        thisToDo.setDoneStatus = true;
+    } else {
+        thisToDo.setDoneStatus = false;
+    }
+
+    saveToLocalStorage();
+}
+
 //function to edit the toDo in the cards
 
 function editCard (event) {
@@ -493,6 +518,16 @@ function editCard (event) {
     titleDiv.setAttribute("class", "titleDiv");
     titleDiv.appendChild(titleLabel);
     titleDiv.appendChild(title);
+
+    let status = document.createElement("input");
+    status.setAttribute("type", "checkbox");
+    status.setAttribute("id", "status");
+    status.setAttribute("name", "status");
+    status.setAttribute("class", "checkbox");
+    if (thisToDo.doneStatus === true) {
+        status.checked = true; 
+    };
+
 
     //description input field
     let description = document.createElement("input");
@@ -595,7 +630,7 @@ function editCard (event) {
     submitButton.textContent = "Save Changes";
     submitButton.addEventListener("click", (event) => {
 
-        editToDo(event, thisToDo)
+        editToDo(event, thisToDo, title, description, dueDate, priority, projectSelection, status);
         
         if (page === "allTasks") {
             allTasks(); 
@@ -638,6 +673,7 @@ function editCard (event) {
     form.appendChild(priorityDiv);
     form.appendChild(projectSelectionDiv);
     form.appendChild(buttonsDiv);
+    form.appendChild(status);
 
     //prepend the form to the event.target.parentNode
 
