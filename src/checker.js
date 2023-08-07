@@ -28,6 +28,4 @@ const houseStuff = "House Stuff";
 allToDos.push(presents, lunch, shower, plants);
 allProjects.push(selfCare, houseStuff);
 
-saveToLocalStorage()
-
 export { allToDos, allProjects, page }

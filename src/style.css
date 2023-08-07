@@ -135,6 +135,7 @@ select {
     height: 3vh;
     min-width: 3.5vw;
     padding: 0.5vh;
+    font-size: 1vh;
     border-radius: 0.5vh;
     border: 1px solid black;
 }
@@ -289,6 +290,7 @@ select {
     height: 100%;
     min-width: 3vw;
     padding: 0.5vh;
+    font-size: 1vh;
     border-radius: 0.5vh;
     border: 1px solid black;
 }
